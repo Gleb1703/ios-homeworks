@@ -9,7 +9,7 @@ import UIKit
 
 class FeedViewController: UIViewController {
     
-    var dataSource = FeelModel(title: "Some Sitle", description: "Some Description")
+    var post = Post(title: "пост")
     
         private let showDetailButton : UIButton = {
             let button = UIButton()
@@ -18,16 +18,16 @@ class FeedViewController: UIViewController {
             return button
         }()
         
-    let alertController = UIAlertController(title: "ossicle", message: "message", preferredStyle: .alert)
+//    let alertController = UIAlertController(title: "ossicle", message: "message", preferredStyle: .alert)
     
         override func viewDidLoad() {
             super.viewDidLoad()
             view.backgroundColor = .systemPink
             view.addSubview(showDetailButton)
             showDetailButton.frame = CGRect(x: 100, y: 400, width: 100, height: 50)
-            showDetailButton.setTitle(dataSource.title, for: .normal)
+            showDetailButton.setTitle(post.title, for: .normal)
             addTarget()
-            setupAlertConfiguration()
+//      setupAlertConfiguration()
         }
         
         func addTarget() {
@@ -36,17 +36,19 @@ class FeedViewController: UIViewController {
         
         @objc
         func tabOnButton() {
-            let detailView = DetailController()
-          navigationController?.pushViewController(detailView, animated: true)
+            let postViewController = PostViewController()
+            postViewController.titlePost = post.title
+          navigationController?.pushViewController(postViewController, animated: true)
             
-            self.present(alertController, animated: true, completion: nil)
+//            self.present(alertController, animated: true, completion: nil)
         }
-    
+
+/*
     func setupAlertConfiguration() {
         let action = UIAlertAction(title: "OK", style: .default) {_ in
             print("Bye")
         }
         alertController.addAction(action)
-    }
-    
+*/
 }
+    

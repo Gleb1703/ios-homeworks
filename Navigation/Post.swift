@@ -7,9 +7,8 @@
 
 import Foundation
 
-struct FeelModel {
+struct Post {
     
     var title: String
-    var description: String
     
 }
