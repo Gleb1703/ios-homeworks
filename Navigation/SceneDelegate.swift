@@ -11,6 +11,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
     var feedTabNavigationController = TabBarController()
+    
+    
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -22,8 +24,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window.rootViewController = feedTabNavigationController
         window.makeKeyAndVisible()
         self.window = window
+        
     }
-
+    
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
         // This occurs shortly after the scene enters the background, or when its session is discarded.

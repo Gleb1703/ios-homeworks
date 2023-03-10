@@ -33,7 +33,7 @@ class TabBarController: UITabBarController{
         firstTabNavigationController.tabBarItem = item1
         secondTabNavigationController.tabBarItem = item2
         
-        UITabBar.appearance().tintColor = UIColor(red: 220/255.0, green: 10/255.0, blue: 100/255.0, alpha: 1)
-        UITabBar.appearance().backgroundColor = .orange
+        UITabBar.appearance().tintColor = UIColor(red: 10/255.0, green: 10/255.0, blue: 20/255.0, alpha: 1)
+        UITabBar.appearance().backgroundColor = .white
     }
 }

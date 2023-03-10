@@ -11,14 +11,13 @@ class FeedViewController: UIViewController {
     
     var post = Post(title: "пост")
     
+    
         private let showDetailButton : UIButton = {
             let button = UIButton()
             button.setTitle("Показать детали", for: .normal)
             button.setTitleColor(UIColor.black, for: .normal)
             return button
         }()
-        
-//    let alertController = UIAlertController(title: "ossicle", message: "message", preferredStyle: .alert)
     
         override func viewDidLoad() {
             super.viewDidLoad()
@@ -27,7 +26,6 @@ class FeedViewController: UIViewController {
             showDetailButton.frame = CGRect(x: 100, y: 400, width: 100, height: 50)
             showDetailButton.setTitle(post.title, for: .normal)
             addTarget()
-//      setupAlertConfiguration()
         }
         
         func addTarget() {
@@ -39,16 +37,6 @@ class FeedViewController: UIViewController {
             let postViewController = PostViewController()
             postViewController.titlePost = post.title
           navigationController?.pushViewController(postViewController, animated: true)
-            
-//            self.present(alertController, animated: true, completion: nil)
         }
-
-/*
-    func setupAlertConfiguration() {
-        let action = UIAlertAction(title: "OK", style: .default) {_ in
-            print("Bye")
-        }
-        alertController.addAction(action)
-*/
 }
     
