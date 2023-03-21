@@ -11,6 +11,7 @@
 		F7351BBE295CD2A20012F24A /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7351BBD295CD2A20012F24A /* InfoViewController.swift */; };
 		F747A02D297440B5002D431F /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F747A02C297440B5002D431F /* ProfileHeaderView.swift */; };
 		F75A1FE9299D057400D708C0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F75A1FE8299D057400D708C0 /* Assets.xcassets */; };
+		F76C63AA29C60F900012A0D2 /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = F76C63A929C60F900012A0D2 /* Algorithms */; };
 		F78987D8294E3A8A00A11E29 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78987D7294E3A8A00A11E29 /* AppDelegate.swift */; };
 		F78987DA294E3A8A00A11E29 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78987D9294E3A8A00A11E29 /* SceneDelegate.swift */; };
 		F78987DC294E3A8A00A11E29 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78987DB294E3A8A00A11E29 /* ViewController.swift */; };
@@ -19,6 +20,8 @@
 		F78987F2294E4A6D00A11E29 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78987F1294E4A6D00A11E29 /* ProfileViewController.swift */; };
 		F78987F5294E4D2D00A11E29 /* DetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78987F4294E4D2D00A11E29 /* DetailController.swift */; };
 		F78987F8294E56F700A11E29 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78987F7294E56F700A11E29 /* Post.swift */; };
+		F7A2142229CA3C83007DE8F7 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7A2142129CA3C83007DE8F7 /* Constants.swift */; };
+		F7A2142429CA3CAE007DE8F7 /* TextFieldWithPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7A2142329CA3CAE007DE8F7 /* TextFieldWithPadding.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +39,8 @@
 		F78987F1294E4A6D00A11E29 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		F78987F4294E4D2D00A11E29 /* DetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailController.swift; sourceTree = "<group>"; };
 		F78987F7294E56F700A11E29 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		F7A2142129CA3C83007DE8F7 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		F7A2142329CA3CAE007DE8F7 /* TextFieldWithPadding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldWithPadding.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +48,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F76C63AA29C60F900012A0D2 /* Algorithms in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,6 +87,7 @@
 				F78987DB294E3A8A00A11E29 /* ViewController.swift */,
 				F7351BBD295CD2A20012F24A /* InfoViewController.swift */,
 				F78987F7294E56F700A11E29 /* Post.swift */,
+				F7A2142129CA3C83007DE8F7 /* Constants.swift */,
 				F78987F6294E4D4800A11E29 /* DetailController */,
 				F78987ED294E484000A11E29 /* TabBarModule */,
 				F78987F0294E49ED00A11E29 /* FeedViewController */,
@@ -88,6 +95,7 @@
 				F7351BBC295CCDEE0012F24A /* PostViewController */,
 				F75A1FE8299D057400D708C0 /* Assets.xcassets */,
 				F78987E5294E3A8B00A11E29 /* Info.plist */,
+				F7A2142329CA3CAE007DE8F7 /* TextFieldWithPadding.swift */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -141,6 +149,9 @@
 			dependencies = (
 			);
 			name = Navigation;
+			packageProductDependencies = (
+				F76C63A929C60F900012A0D2 /* Algorithms */,
+			);
 			productName = Navigation;
 			productReference = F78987D4294E3A8A00A11E29 /* Navigation.app */;
 			productType = "com.apple.product-type.application";
@@ -169,6 +180,9 @@
 				Base,
 			);
 			mainGroup = F78987CB294E3A8A00A11E29;
+			packageReferences = (
+				F76C63A829C60F900012A0D2 /* XCRemoteSwiftPackageReference "swift-algorithms" */,
+			);
 			productRefGroup = F78987D5294E3A8A00A11E29 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -198,6 +212,7 @@
 				F78987DC294E3A8A00A11E29 /* ViewController.swift in Sources */,
 				F747A02D297440B5002D431F /* ProfileHeaderView.swift in Sources */,
 				F78987F5294E4D2D00A11E29 /* DetailController.swift in Sources */,
+				F7A2142429CA3CAE007DE8F7 /* TextFieldWithPadding.swift in Sources */,
 				F78987EC294E3CB900A11E29 /* TabbarController.swift in Sources */,
 				F7351BBE295CD2A20012F24A /* InfoViewController.swift in Sources */,
 				F78987F8294E56F700A11E29 /* Post.swift in Sources */,
@@ -205,6 +220,7 @@
 				F78987F2294E4A6D00A11E29 /* ProfileViewController.swift in Sources */,
 				F78987D8294E3A8A00A11E29 /* AppDelegate.swift in Sources */,
 				F78987DA294E3A8A00A11E29 /* SceneDelegate.swift in Sources */,
+				F7A2142229CA3C83007DE8F7 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -401,6 +417,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		F76C63A829C60F900012A0D2 /* XCRemoteSwiftPackageReference "swift-algorithms" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-algorithms.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		F76C63A929C60F900012A0D2 /* Algorithms */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F76C63A829C60F900012A0D2 /* XCRemoteSwiftPackageReference "swift-algorithms" */;
+			productName = Algorithms;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = F78987CC294E3A8A00A11E29 /* Project object */;
 }
