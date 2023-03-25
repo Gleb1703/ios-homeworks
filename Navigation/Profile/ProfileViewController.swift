@@ -7,14 +7,43 @@
 
 import UIKit
 
-let headerView = ProfileHeaderView()
-
 class ProfileViewController: UIViewController {
-    
+
+    let profileHeaderView = ProfileHeaderView()
+
+    private let newButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("New Button", for: .normal)
+        button.backgroundColor = .systemBlue
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+
     override func viewDidLoad() {
-        viewWillLayoutSubviews()
-        view.backgroundColor = .lightGray
-        headerView.frame = CGRect(x: 16, y: 16, width: 100, height: 100)
-        view.addSubview(headerView)
+        super.viewDidLoad()
+        view.backgroundColor = .blue
+        view.addSubview(profileHeaderView)
+        view.addSubview(newButton)
+        self.title = "Profile"
+        self.navigationController?.navigationBar.backgroundColor = .white
+        constraints()
     }
+
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+    }
+
+    func constraints() {
+        NSLayoutConstraint.activate([
+            profileHeaderView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            profileHeaderView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            profileHeaderView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            profileHeaderView.heightAnchor.constraint(equalToConstant: 265),
+
+            newButton.leftAnchor.constraint(equalTo: view.leftAnchor),
+            newButton.rightAnchor.constraint(equalTo: view.rightAnchor),
+            newButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ])
+    }
+    
 }
