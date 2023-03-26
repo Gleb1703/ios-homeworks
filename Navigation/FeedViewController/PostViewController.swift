@@ -9,11 +9,11 @@ import UIKit
 
 class PostViewController: UIViewController {
 
-    var dataTitle = FeedViewController().dataSource.title
+//    var dataTitle = FeedViewController().dataSource.title
 
     override func viewDidLoad() {
         view.backgroundColor = .yellow
-        self.title = dataTitle
+//        self.title = dataTitle
         showBarButton()
     }
 
