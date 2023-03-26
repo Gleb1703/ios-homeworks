@@ -14,16 +14,16 @@ class FeedViewController: UIViewController {
         view.axis = .vertical
         view.alignment = .center
         view.spacing = 10
-        view.backgroundColor = .gray
+        view.backgroundColor = .white
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
 
-//    var dataSource = Post(title: "показать")
+//    var dataSource = Post(title: "Название поста")
 
     private let postButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = .systemGray
+        button.backgroundColor = .systemGray4
         button.setTitle("Пост", for: .normal)
         button.layer.borderWidth = 2
         button.setTitleColor(.black, for: .normal)
@@ -31,7 +31,7 @@ class FeedViewController: UIViewController {
     }()
     private let postButton2: UIButton = {
         let button = UIButton()
-        button.backgroundColor = .systemYellow
+        button.backgroundColor = .systemOrange
         button.setTitle("Пост 2", for: .normal)
         button.layer.borderWidth = 1
         button.layer.cornerRadius = 5
