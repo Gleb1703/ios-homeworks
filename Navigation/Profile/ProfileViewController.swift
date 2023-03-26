@@ -9,41 +9,69 @@ import UIKit
 
 class ProfileViewController: UIViewController {
 
-    let profileHeaderView = ProfileHeaderView()
-
-    private let newButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("New Button", for: .normal)
-        button.backgroundColor = .systemBlue
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
+    private lazy var tableView: UITableView = {
+        let tView = UITableView()
+        tView.backgroundColor = .lightGray
+        tView.tableHeaderView = ProfileHeaderView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 265))
+        tView.dataSource = self
+        tView.delegate = self
+        tView.showsVerticalScrollIndicator = false
+        tView.register(PostTableViewCell.self, forCellReuseIdentifier: "PostTableViewCell")
+        tView.translatesAutoresizingMaskIntoConstraints = false
+        return tView
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .blue
-        view.addSubview(profileHeaderView)
-        view.addSubview(newButton)
-        self.title = "Profile"
-        self.navigationController?.navigationBar.backgroundColor = .white
-        constraints()
+        view.backgroundColor = .lightGray
+        view.addSubview(tableView)
+        setup()
+        setupGestures()
     }
 
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-    }
-
-    func constraints() {
+    func setup() {
         NSLayoutConstraint.activate([
-            profileHeaderView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            profileHeaderView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            profileHeaderView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            profileHeaderView.heightAnchor.constraint(equalToConstant: 265),
-
-            newButton.leftAnchor.constraint(equalTo: view.leftAnchor),
-            newButton.rightAnchor.constraint(equalTo: view.rightAnchor),
-            newButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            tableView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            tableView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
+
+    //  MARK: - убираем клавиатуру по нажатию в любом месте экрана
+    private func setupGestures() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(viewTapHideKbd))
+        view.addGestureRecognizer(tapGesture)
+    }
+    @objc func viewTapHideKbd() {
+        view.endEditing(true)
+    }
+
+}
+
+extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        postArray.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = PostTableViewCell()
+        cell.backgroundColor = .white
+        cell.fillData(with: postArray, indexPath: indexPath)
+        return cell
+    }
+
+    // Хэддер _секции_
+    /*
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let sectionHeader = ProfileHeaderView()
+        return sectionHeader
+    }
+     */
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 265
+    }
+
 }

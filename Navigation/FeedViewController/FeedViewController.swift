@@ -19,7 +19,7 @@ class FeedViewController: UIViewController {
         return view
     }()
 
-    var dataSource = Post(title: "показать")
+//    var dataSource = Post(title: "показать")
 
     private let postButton: UIButton = {
         let button = UIButton()
