@@ -5,6 +5,7 @@
 //  Created by gleb on 17/12/2022.
 //
 
+import StorageService
 import UIKit
 
 class ProfileViewController: UIViewController {
@@ -23,7 +24,11 @@ class ProfileViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .lightGray
+        #if DEBUG
+        view.backgroundColor = .blue
+        #else
+        view.backgroundColor = .red
+        #endif
         view.addSubview(tableView)
         setup()
         setupGestures()
@@ -51,24 +56,16 @@ class ProfileViewController: UIViewController {
 
 extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         postArray.count
     }
 
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = PostTableViewCell()
         cell.backgroundColor = .white
         cell.fillData(with: postArray, indexPath: indexPath)
         return cell
     }
-
-    // Хэддер _секции_
-    /*
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let sectionHeader = ProfileHeaderView()
-        return sectionHeader
-    }
-     */
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 265

@@ -1,16 +1,17 @@
 //
-//  PostViewController.swift
+//  HandViewController.swift
 //  Navigation
 //
-//  Created by gleb on 28/12/2022.
+//  Created by gleb on 10/05/2023.
 //
 
 import UIKit
 
-class PostViewController: UIViewController {
+class HandViewController: UIViewController {
 
     override func viewDidLoad() {
-        view.backgroundColor = .yellow
+        super.viewDidLoad()
+        view.backgroundColor = UIColor(named: "Color")
         showBarButton()
     }
 

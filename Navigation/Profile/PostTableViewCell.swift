@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import StorageService
 
-class PostTableViewCell: UITableViewCell {
+public class PostTableViewCell: UITableViewCell {
 
     private var authorLabel: UILabel = {
         let label = UILabel()
@@ -92,7 +93,7 @@ class PostTableViewCell: UITableViewCell {
         ])
     }
 
-    func fillData(with data: [Post], indexPath: IndexPath) {
+    public func fillData(with data: [Post], indexPath: IndexPath) {
         authorLabel.text = postArray[indexPath.row].author
         postImageView.image = UIImage(named: postArray[indexPath.row].image)
         descriptionText.text = postArray[indexPath.row].description

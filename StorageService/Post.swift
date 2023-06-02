@@ -7,13 +7,13 @@
 
 import Foundation
 
-struct Post {
+public struct Post {
 
-    var author: String
-    var description: String
-    var image: String
-    var likes: Int
-    var views: Int
+    public var author: String
+    public var description: String
+    public var image: String
+    public var likes: Int
+    public var views: Int
 
 }
 
@@ -39,4 +39,4 @@ let post4 = Post(author: "ЧистыеХвосты.com", description: """
                 Мыть крыс нужно осторожно, чтобы вода не попадала в ушки. И делать это нужно не слишком часто, так как шерстку друг другу крысы чистят сами. Но хвосты у крыс легко загрязняются и нуждаются во внимании человека.
                 """, image: "fourthRatNews", likes: 268, views: 564)
 
-var postArray: [Post] = [post1, post2, post3, post4]
+public var postArray: [Post] = [post1, post2, post3, post4]
