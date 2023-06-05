@@ -7,8 +7,11 @@
 
 import UIKit
 import StorageService
+import iOSIntPackage
 
 public class PostTableViewCell: UITableViewCell {
+    
+    let imageProcessor = ImageProcessor() //фильтр для картинок (экземпляр структуры)
 
     private var authorLabel: UILabel = {
         let label = UILabel()
@@ -99,6 +102,13 @@ public class PostTableViewCell: UITableViewCell {
         descriptionText.text = postArray[indexPath.row].description
         likesLabel.text = "Likes: \(String(postArray[indexPath.row].likes)) ❤️"
         viewsLabel.text = "Views: \(String(postArray[indexPath.row].views)) 👁️"
+    }
+    
+    func setup(with post: Post){
+        ImageProcessor().processImage(sourceImage: UIImage(named: post.image)!, filter: .fade) { image in
+            postImageView.image = image
+                }
+
     }
 
 }
