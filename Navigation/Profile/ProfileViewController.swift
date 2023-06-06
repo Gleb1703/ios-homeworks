@@ -5,6 +5,7 @@
 //  Created by gleb on 17/12/2022.
 //
 
+
 import UIKit
 import StorageService
 
@@ -63,9 +64,9 @@ class ProfileViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
 #if DEBUG
-        view.backgroundColor = .white
+        view.backgroundColor = .blue
 #else
-        view.backgroundColor = .yellow
+        view.backgroundColor = .red
 #endif
         
         setupNavigationBar()
@@ -204,3 +205,5 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         
         }
         }
+
+

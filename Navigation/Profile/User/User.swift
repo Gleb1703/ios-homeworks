@@ -26,8 +26,8 @@ class User {
 }
 
 class CurrentUserService: UserService {
-    private let user = User(login: "hipster", fullName: "Hipster Cat", avatarImage: UIImage(named: "IMG_0924")! , status: "Waiting for something" )
-    private let userPass = "cat"
+    private let user = User(login: "White", fullName: "White Rat", avatarImage: UIImage(named: "IMG_0924")! , status: "Waiting for something" )
+    private let userPass = "White"
     
     func checkLogin(login: String, pass: String) -> User? {
         if (login == user.login) && (pass == userPass) {
@@ -38,8 +38,8 @@ class CurrentUserService: UserService {
     }
 }
     class TestUserService: UserService {
-        private let testUser = User(login: "mops", fullName: "Hipster dog", avatarImage: UIImage(named: "dog1")! , status: "I'm pretty" )
-        private let testUserPass = "dog"
+        private let testUser = User(login: "twins", fullName: "Twins rat", avatarImage: UIImage(named: "twins")! , status: "scared..." )
+        private let testUserPass = "twins"
         
         func checkLogin(login: String, pass: String) -> User? {
             if (login == testUser.login) && (pass == testUserPass) {
