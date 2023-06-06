@@ -91,20 +91,20 @@ class LogInViewController: UIViewController{
     @objc func goToProfile() {
         
 #if DEBUG
-        let choiseLoginService = TestUserService().checkLogin(login: loginTextField.text!, pass: passwordTextField.text!)
+    let choiseLoginService = TestUserService().checkLogin(login: loginTextField.text!, pass: passwordTextField.text!)
 #else
-        let choiseLoginService = CurrentUserService().checkLogin(login: loginTextField.text!, pass: passwordTextField.text!)
+    let choiseLoginService = CurrentUserService().checkLogin(login: loginTextField.text!, pass: passwordTextField.text!)
 #endif
         if let checkedUser = choiseLoginService {
             let profileVC = ProfileViewController()
             profileVC.newUser = checkedUser
             navigationController?.pushViewController(profileVC, animated: true)
-        }
-        else {
+        } else {
             let alert = UIAlertController(title: "Unknown login", message: "Please, enter correct user login", preferredStyle: .alert)
                         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
                         self.present(alert, animated: true)
 
+            
         }
         
     }
