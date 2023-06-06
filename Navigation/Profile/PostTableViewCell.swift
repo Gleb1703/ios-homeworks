@@ -9,99 +9,81 @@ import UIKit
 import StorageService
 import iOSIntPackage
 
-public class PostTableViewCell: UITableViewCell {
+class PostTableViewCell: UITableViewCell {
     
-    let imageProcessor = ImageProcessor() //фильтр для картинок (экземпляр структуры)
-
-    private var authorLabel: UILabel = {
-        let label = UILabel()
-        label.numberOfLines = 2
-        label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
-        label.textColor = .black
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
+    private(set) lazy var authorLabel: UILabel = {
+        let authorLabel = UILabel()
+        authorLabel.font = .systemFont(ofSize: 20, weight: .bold)
+        authorLabel.textColor = .black
+        authorLabel.numberOfLines = 2
+        authorLabel.translatesAutoresizingMaskIntoConstraints = false
+        return authorLabel
     }()
-
-    private var postImageView: UIImageView = {
+    
+    private(set) lazy var postImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .black
-        imageView.contentMode = .scaleAspectFit
+        imageView.clipsToBounds = true
+        imageView.contentMode = .scaleAspectFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
-
-    private var descriptionText: UILabel = {
-        let desc = UILabel()
-        desc.numberOfLines = 0
-        desc.textColor = .systemGray
-        desc.font = UIFont.systemFont(ofSize: 14, weight: .regular)
-        desc.translatesAutoresizingMaskIntoConstraints = false
-        return desc
+    
+    private(set) lazy var descriptionLabel: UILabel = {
+        let descriptionLabel = UILabel()
+        descriptionLabel.font = .systemFont(ofSize: 14, weight: .regular)
+        descriptionLabel.textColor = .systemGray
+        descriptionLabel.numberOfLines = 0
+        descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
+        return descriptionLabel
     }()
-
-    private var likesLabel: UILabel = {
-        let likes = UILabel()
-        likes.textColor = .black
-        likes.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        likes.translatesAutoresizingMaskIntoConstraints = false
-        return likes
+    
+    private(set) lazy var likesViewsLabel: UILabel = {
+        let likesViewsLabel = UILabel()
+        likesViewsLabel.font = .systemFont(ofSize: 16, weight: .regular)
+        likesViewsLabel.textColor = .black
+        likesViewsLabel.translatesAutoresizingMaskIntoConstraints = false
+        return likesViewsLabel
     }()
-
-    private var viewsLabel: UILabel = {
-        let views = UILabel()
-        views.textColor = .black
-        views.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        views.textAlignment = .right
-        views.translatesAutoresizingMaskIntoConstraints = false
-        return views
-    }()
-
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setup()
+        self.setupView()
+        
     }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        self.setupView()
+        
     }
-
-    private func setup() {
-        contentView.addSubview(authorLabel)
-        contentView.addSubview(postImageView)
-        contentView.addSubview(descriptionText)
-        contentView.addSubview(likesLabel)
-        contentView.addSubview(viewsLabel)
-
+    
+    
+    private func setupView() {
+        
+        self.contentView.addSubview(authorLabel)
+        self.contentView.addSubview(postImageView)
+        self.contentView.addSubview(descriptionLabel)
+        self.contentView.addSubview(likesViewsLabel)
+        
         NSLayoutConstraint.activate([
-            authorLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: CGFloat(Constants.standartMarggin)),
-            authorLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: CGFloat(Constants.standartMarggin)),
-            authorLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: CGFloat(Constants.standartMarggin)),
-
-            postImageView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width),
-            postImageView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.width),
-            postImageView.topAnchor.constraint(equalTo: authorLabel.bottomAnchor, constant: 12),
-
-            descriptionText.topAnchor.constraint(equalTo: postImageView.bottomAnchor, constant: CGFloat(Constants.standartMarggin)),
-            descriptionText.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: CGFloat(Constants.standartMarggin)),
-            descriptionText.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -CGFloat(Constants.standartMarggin)),
-
-            likesLabel.topAnchor.constraint(equalTo: descriptionText.bottomAnchor, constant: CGFloat(Constants.standartMarggin)),
-            likesLabel.leftAnchor.constraint(equalTo: descriptionText.leftAnchor),
-            likesLabel.widthAnchor.constraint(equalToConstant: (UIScreen.main.bounds.width / 2) - CGFloat(Constants.standartMarggin)),
-            likesLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -CGFloat(Constants.standartMarggin)),
-
-            viewsLabel.topAnchor.constraint(equalTo: likesLabel.topAnchor),
-            viewsLabel.widthAnchor.constraint(equalToConstant: (UIScreen.main.bounds.width / 2) - CGFloat(Constants.standartMarggin)),
-            viewsLabel.rightAnchor.constraint(equalTo: descriptionText.rightAnchor)
+            authorLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 16),
+            authorLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
+            authorLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor),
+            
+            postImageView.topAnchor.constraint(equalTo: self.authorLabel.bottomAnchor, constant: 12),
+            postImageView.widthAnchor.constraint(equalTo: self.contentView.widthAnchor),
+            postImageView.heightAnchor.constraint(equalTo: self.contentView.widthAnchor),
+            
+            descriptionLabel.topAnchor.constraint(equalTo: self.postImageView.bottomAnchor, constant: 16),
+            descriptionLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
+            descriptionLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor),
+            
+            likesViewsLabel.topAnchor.constraint(equalTo: self.descriptionLabel.bottomAnchor, constant: 16),
+            likesViewsLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 16),
+            likesViewsLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor),
+            likesViewsLabel.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -16),
         ])
-    }
-
-    public func fillData(with data: [Post], indexPath: IndexPath) {
-        authorLabel.text = postArray[indexPath.row].author
-        postImageView.image = UIImage(named: postArray[indexPath.row].image)
-        descriptionText.text = postArray[indexPath.row].description
-        likesLabel.text = "Likes: \(String(postArray[indexPath.row].likes)) ❤️"
-        viewsLabel.text = "Views: \(String(postArray[indexPath.row].views)) 👁️"
     }
     
     func setup(with post: Post){
@@ -110,5 +92,4 @@ public class PostTableViewCell: UITableViewCell {
                 }
 
     }
-
 }
