@@ -21,13 +21,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             UINavigationBar.appearance().scrollEdgeAppearance = appearance
         }
         guard let windowScene = (scene as? UIWindowScene) else { return }
-        
-        
-        
         self.window = UIWindow(windowScene: windowScene)
+        
+        let factory = MyLoginFactory()
+        let loginInspector = factory.makeLoginInspector()
+        let loginVC = LogInViewController()
+        loginVC.loginDelegate = loginInspector
+        
+        LogInViewController.loginFactoryDelegate = MyLoginFactory()
+        
+        
         let feedViewController = UINavigationController(rootViewController: FeedViewController())
-        //let profileViewController = UINavigationController(rootViewController: ProfileViewController())
-        let LogInViewController = UINavigationController(rootViewController: LogInViewController())
+        let LogInViewController = UINavigationController(rootViewController: loginVC)
         let tabBarController = UITabBarController()
         tabBarController.viewControllers = [
             feedViewController , LogInViewController
@@ -40,8 +45,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         self.window?.rootViewController = tabBarController
         self.window?.makeKeyAndVisible()
-            
-           
+        
+        
+        
+
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

@@ -39,8 +39,11 @@ class PhotosCollectionViewCell: UICollectionViewCell {
             avaImage.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
         ])
     }
-    func setup(with post: PostImage) {
-        avaImage.image = UIImage(named:post.image)
+    
+    func setup(image: UIImage) {
+        avaImage.image = image
+        
     }
+        
     
 }
