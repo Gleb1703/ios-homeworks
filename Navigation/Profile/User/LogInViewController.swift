@@ -9,6 +9,9 @@ import UIKit
 
 class LogInViewController: UIViewController{
     
+    var loginDelegate: LoginViewControllerDelegate?
+    static var loginFactoryDelegate: LoginFactory?
+    
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
