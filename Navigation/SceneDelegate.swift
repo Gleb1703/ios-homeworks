@@ -13,10 +13,35 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard let _ = (scene as? UIWindowScene) else { return }
+        
+        if #available(iOS 15, *) {
+            let appearance = UINavigationBarAppearance()
+            appearance.configureWithOpaqueBackground()
+            UINavigationBar.appearance().standardAppearance = appearance
+            UINavigationBar.appearance().scrollEdgeAppearance = appearance
+        }
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+        
+        
+        
+        self.window = UIWindow(windowScene: windowScene)
+        let feedViewController = UINavigationController(rootViewController: FeedViewController())
+        //let profileViewController = UINavigationController(rootViewController: ProfileViewController())
+        let LogInViewController = UINavigationController(rootViewController: LogInViewController())
+        let tabBarController = UITabBarController()
+        tabBarController.viewControllers = [
+            feedViewController , LogInViewController
+        ]
+        tabBarController.viewControllers?.enumerated().forEach {
+            $1.tabBarItem.title = $0 == 0 ? "Feed" : "Profile"
+            $1.tabBarItem.image = $0 == 0
+            ? UIImage(systemName: "newspaper")
+            : UIImage(systemName: "person")
+        }
+        self.window?.rootViewController = tabBarController
+        self.window?.makeKeyAndVisible()
+            
+           
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -49,4 +74,5 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
 }
+
 
