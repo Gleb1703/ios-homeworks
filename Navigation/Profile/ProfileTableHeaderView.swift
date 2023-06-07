@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+
 class ProfileTableHeaderView: UITableViewHeaderFooterView{
     
     private var statusText: String = ""

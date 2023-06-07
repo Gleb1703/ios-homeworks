@@ -26,8 +26,8 @@ class User {
 }
 
 class CurrentUserService: UserService {
-    private let user = User(login: "White", fullName: "White Rat", avatarImage: UIImage(named: "IMG_0924")! , status: "Waiting for something" )
-    private let userPass = "White"
+    private let user = User(login: "white", fullName: "White Rat", avatarImage: UIImage(named: "IMG_0924")! , status: "Waiting for something" )
+    private let userPass = "white"
     
     func checkLogin(login: String, pass: String) -> User? {
         if (login == user.login) && (pass == userPass) {
