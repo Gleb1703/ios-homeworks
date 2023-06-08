@@ -1,13 +1,12 @@
 //
-//  ProfileHeaderView.swift
+//  ProfileTableHeaderView.swift
 //  Navigation
 //
-//  Created by gleb on 15/01/2023.
+//  Created by Artem Poletaev on 05.09.2022.
 //
 
 import UIKit
 import SnapKit
-
 class ProfileTableHeaderView: UITableViewHeaderFooterView{
     
     private var statusText: String = ""

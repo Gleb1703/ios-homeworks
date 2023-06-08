@@ -2,7 +2,7 @@
 //  SceneDelegate.swift
 //  Navigation
 //
-//  Created by gleb on 17/12/2022.
+//  Created by Artem Poletaev on 13.07.2022.
 //
 
 import UIKit
@@ -46,6 +46,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.window?.rootViewController = tabBarController
         self.window?.makeKeyAndVisible()
         
+        
+        
+
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

@@ -1,12 +1,12 @@
 //
-//  SecondController.swift
+//  ProfileViewController.swift
 //  Navigation
 //
-//  Created by gleb on 17/12/2022.
+//  Created by Artem Poletaev on 20.07.2022.
 //
 
-
 import UIKit
+import StorageService
 
 class ProfileViewController: UIViewController{
     
@@ -63,9 +63,9 @@ class ProfileViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
 #if DEBUG
-        view.backgroundColor = .blue
+        view.backgroundColor = .white
 #else
-        view.backgroundColor = .red
+        view.backgroundColor = .yellow
 #endif
         
         setupNavigationBar()

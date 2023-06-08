@@ -2,10 +2,11 @@
 //  ProfileCollectionViewCell.swift
 //  Navigation
 //
-//  Created by gleb on 06/06/2023.
+//  Created by Artem Poletaev on 09.09.2022.
 //
 
 import UIKit
+import StorageService
 
 class ProfileCollectionViewCell: UICollectionViewCell {
     
