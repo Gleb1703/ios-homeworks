@@ -88,11 +88,6 @@ class ProfileTableHeaderView: UITableViewHeaderFooterView{
         self.addSubview(self.statusTextLabel)
         self.addSubview(self.textFild)
         self.addSubview(self.button)
-        
-        //Задача 1
-//        Добавьте библиотеку SnapKit через менеджер зависимостей Cocoapods. Используйте последнюю версию библиотеки.
-//        Перепишите и сделайте вёрстку визуальных объектов класса ProfileHeaderView при помощи SnapKit.
-//        Проверьте, что ваша вёрстка хорошо смотрится на экранах различных устройств от iPhone SE до iPhone 13 Pro Max.
 
         profileHeaderView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
@@ -148,3 +143,5 @@ class ProfileTableHeaderView: UITableViewHeaderFooterView{
         
     }
 }
+
+

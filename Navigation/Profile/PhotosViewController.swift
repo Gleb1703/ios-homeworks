@@ -18,6 +18,15 @@ class PhotosViewController: UIViewController {
             }
         }
     }
+//    var viewModel: PhotoViewModel! {
+//        init(viewModel: PhotoViewModel) {
+//            self.viewModel = viewModel
+//            self.viewModel.imageNameDidChenge = { [weak self] viewModel in
+//                self?.setupObserver(imagesArray: viewModel.ImageNames)
+//            }
+//        }
+//    }
+
     
     private var recivedImages: [UIImage] = []
     private let imageFasade = ImagePublisherFacade()
@@ -131,4 +140,3 @@ extension PhotosViewController: ImageLibrarySubscriber {
     
 }
     
-
