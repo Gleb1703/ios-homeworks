@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import StorageService
+// import StorageService
 
 class ProfileViewController: UIViewController{
     
@@ -63,9 +63,9 @@ class ProfileViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
 #if DEBUG
-        view.backgroundColor = .blue
+        view.backgroundColor = .white
 #else
-        view.backgroundColor = .red
+        view.backgroundColor = .yellow
 #endif
         
         setupNavigationBar()

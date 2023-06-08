@@ -35,9 +35,21 @@ public struct PostImage {
             tempImage.append(PostImage(image: names))
         }
         return tempImage
+        
     }
+    public static func makeArrayImage() -> [UIImage] {
+        var tempImages = [UIImage]()
+        let data = ["image1","image2","image3","image4","image5","image6","image7","image8","image9","image10","image11","image12","image13","image14","image15","image16","image17","image18","image19","image20",]
+        for (_,name) in data.enumerated() {
+            tempImages.append(UIImage(named: name)!)
+        }
+        return tempImages
+    }
+    public static func makeArrayImage(countPhoto: Int, startIndex: Int) -> [UIImage] {
+        if (startIndex < PostImage.makeArrayImage().count && startIndex >= 0)  &&  startIndex + countPhoto < PostImage.makeArrayImage().count {
+                    return Array(PostImage.makeArrayImage()[startIndex...countPhoto + startIndex - 1])
+                }
+                return PostImage.makeArrayImage()
+        }
+    
 }
-
-
-
-

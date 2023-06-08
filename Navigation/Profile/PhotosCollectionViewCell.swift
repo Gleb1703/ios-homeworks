@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import StorageService
+// import StorageService
 
 class PhotosCollectionViewCell: UICollectionViewCell {
     
