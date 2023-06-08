@@ -8,7 +8,7 @@
 import UIKit
 
 class FeedModel {
-    private let secret = "нагетс"
+    private let secret = "2121"
     
     func check(word: String) -> Bool {
          word == secret

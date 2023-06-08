@@ -11,6 +11,7 @@ import StorageService
 class FeedViewController: UIViewController {
     var post = "Мой пост"
     
+    weak var coordinator: FeedCoordinator?
     
     private lazy var stackView: UIStackView = {
         let stack = UIStackView()
@@ -51,11 +52,11 @@ class FeedViewController: UIViewController {
         
         if !checkedSecret.isEmpty {
             if FeedModel().check(word: checkedSecret) {
-                self.checkLabel.text = "Верно"
+                self.checkLabel.text = "Правельно"
                 self.checkLabel.textColor = .green
             } else {
                 self.checkLabel.textColor = .red
-                self.checkLabel.text = "Неверно"
+                self.checkLabel.text = "Ошибка"
             }
         } else {
             print("❌")
@@ -68,9 +69,7 @@ class FeedViewController: UIViewController {
     }
     
     private func postTap() {
-        let postViewController = PostViewController()
-        self.navigationController?.pushViewController(postViewController, animated: true)
-        postViewController.titlePost = post
+        coordinator?.toPostViewController()
        
     }
     
@@ -85,7 +84,7 @@ class FeedViewController: UIViewController {
         
         setupConstraints()
     }
-    
+    //MARK: - Constraint
     private func setupConstraints() {
         NSLayoutConstraint.activate([
             stackView.heightAnchor.constraint(equalToConstant: 200),

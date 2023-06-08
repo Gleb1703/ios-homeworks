@@ -148,5 +148,3 @@ class ProfileTableHeaderView: UITableViewHeaderFooterView{
         
     }
 }
-
-

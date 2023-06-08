@@ -11,10 +11,17 @@ import iOSIntPackage
 
 class PhotosViewController: UIViewController {
     
+    var viewModel: PhotoViewModel! {
+        didSet {
+            self.viewModel.imageNameDidChenge = { [ weak self ] viewModel in
+                self?.setupObserver(imagesArray: viewModel.ImageNames)
+            }
+        }
+    }
+    
     private var recivedImages: [UIImage] = []
     private let imageFasade = ImagePublisherFacade()
     
-    var textTitle: String?
     
     private let postImage = PostImage.setupImages()
     
@@ -45,22 +52,22 @@ class PhotosViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCollectionView()
-        setupObserver()
+        viewModel?.showMagic()
     }
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
                 imageFasade.removeSubscription(for: self)
             }
        
-    private func setupObserver() {
-            imageFasade.subscribe(self)
-            imageFasade.addImagesWithTimer(time: 0.5 , repeat: 20 )
-
-        }
+    private func setupObserver(imagesArray: [PostImage]?) {
+        imageFasade.subscribe(self)
+        imageFasade.addImagesWithTimer(time: 0.5 , repeat: 20 )
+        
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        title = textTitle
+        title = "Photo Gallery"
         print("viewWillAppear")
         view.backgroundColor = .white
         navigationController?.navigationBar.isHidden = false
@@ -124,3 +131,4 @@ extension PhotosViewController: ImageLibrarySubscriber {
     
 }
     
+

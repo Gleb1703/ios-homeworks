@@ -9,8 +9,8 @@ import UIKit
 
 class LogInViewController: UIViewController{
     
-    var loginDelegate: LoginViewControllerDelegate?
-    static var loginFactoryDelegate: LoginFactory?
+    weak var coordinator: ProfileCoordinator?
+    var viewModel: LoginViewModel?
     
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -78,6 +78,7 @@ class LogInViewController: UIViewController{
         super.viewDidLoad()
         setupView()
         setupGesture()
+    
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -92,23 +93,21 @@ class LogInViewController: UIViewController{
     }
     
     @objc func goToProfile() {
-        
-         guard let checkResults = LogInViewController.loginFactoryDelegate?.makeLoginInspector().check(login: loginTextField.text!, pass: passwordTextField.text!) else {
-            return }
-
-        if checkResults {
-                    guard let user = Checker.shared.user else { return }
-            let profileVC = ProfileViewController()
-            profileVC.newUser = user
-            navigationController?.pushViewController(profileVC, animated: true)
+        do {
+            try viewModel?.buttonTapped(login: loginTextField.text!, pass: passwordTextField.text!)
+        } catch LoginViewModel.LoginError.emptyFields {
+            let alert = UIAlertController(title: "Error", message: "Please enter both username and password", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            present(alert, animated: true, completion: nil)
+        } catch LoginViewModel.LoginError.invalidCredentials {
+            let alert = UIAlertController(title: "Error", message: "Invalid username or password", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            present(alert, animated: true, completion: nil)
+        } catch {
+            let alert = UIAlertController(title: "Error", message: "An error occurred", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            present(alert, animated: true, completion: nil)
         }
-        else {
-            let alert = UIAlertController(title: "Unknown login", message: "Please, enter correct user login", preferredStyle: .alert)
-                        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-                        self.present(alert, animated: true)
-
-        }
-        
     }
     
     private func setupView() {

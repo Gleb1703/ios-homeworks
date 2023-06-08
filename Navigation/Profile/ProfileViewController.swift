@@ -13,8 +13,22 @@ class ProfileViewController: UIViewController{
     private var movies: [Post] = StorageOfPosts.viewModel
     var startPoint: CGPoint?
     var cornerRadiusAvatar: CGFloat?
-    var newUser: User? = nil
 
+    weak var coordinator: ProfileCoordinator?
+    
+    private var currentUser: User?
+    
+    
+        private var cartoons = [Post]()
+
+        var viewModel: ProfileViewModel! {
+            didSet {
+                self.viewModel.userDidChange = { [ weak self ] viewModel in
+                    self?.currentUser = viewModel.user ?? nil
+                    self?.cartoons = viewModel.cartoons ?? []
+                }
+            }
+        }
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.delegate = self
@@ -63,14 +77,15 @@ class ProfileViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
 #if DEBUG
-        view.backgroundColor = .blue
+        view.backgroundColor = .white
 #else
-        view.backgroundColor = .red
+        view.backgroundColor = .yellow
 #endif
         
         setupNavigationBar()
         setupView()
         setupGestures()
+        viewModel.getData()
     }
     
     private func setupNavigationBar() {
@@ -162,17 +177,17 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? 1 : movies.count
+        return section == 0 ? 1 : cartoons.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cellOne = tableView.dequeueReusableCell(withIdentifier: "PhotosTableCell") as? PhotosTableViewCell else { return tableView.dequeueReusableCell(withIdentifier: "defaultcell", for: indexPath) }
         guard let cellTwo = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as? PostTableViewCell else { return tableView.dequeueReusableCell(withIdentifier: "defaultcell", for: indexPath) }
-        cellTwo.authorLabel.text = movies[indexPath.row].author
-        cellTwo.postImageView.image = UIImage(named: movies[indexPath.row].image)
-        cellTwo.descriptionLabel.text = movies[indexPath.row].description
-        cellTwo.likesViewsLabel.text = "views: \(movies[indexPath.row].views) likes: \(movies[indexPath.row].likes)"
-        let post = movies[indexPath.row]
+        cellTwo.authorLabel.text = cartoons[indexPath.row].author
+        cellTwo.postImageView.image = UIImage(named: cartoons[indexPath.row].image)
+        cellTwo.descriptionLabel.text = cartoons[indexPath.row].description
+        cellTwo.likesViewsLabel.text = "views: \(cartoons[indexPath.row].views) likes: \(movies[indexPath.row].likes)"
+        let post = cartoons[indexPath.row]
         cellTwo.setup(with: post)
         return indexPath.section == 0 ? cellOne : cellTwo
         
@@ -181,16 +196,13 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("Section \(indexPath.section) - Row \(indexPath.row)")
         tableView.deselectRow(at: indexPath, animated:true)
-        let vc = PhotosViewController()
-        vc.textTitle = "Photo Gallery"
-        indexPath.section == 0 ? navigationController?.pushViewController(vc, animated: true) : nil
-
+        coordinator?.toPhotosViewController()
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
             if section == 0{
                 guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "HeaderView")as? ProfileTableHeaderView else { return nil }
-                if let newUser = newUser {
+                if let newUser = currentUser {
                     header.setup(fullName: newUser.fullName, avatarimage: newUser.avatarImage, status: newUser.status)}
                 
                 let tapOnAvatarImageGusture = UITapGestureRecognizer(target: self, action: #selector(tapOnAvatarImage))
