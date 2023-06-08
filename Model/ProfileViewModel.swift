@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import StorageService
 
 class ProfileViewModel {
     var cartoons: [Post]?

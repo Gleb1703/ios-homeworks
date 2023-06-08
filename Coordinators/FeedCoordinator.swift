@@ -6,7 +6,6 @@
 //
 
 import UIKit
- import StorageService
 
  class FeedCoordinator: Coordinator {
          var post = "Мой пост"

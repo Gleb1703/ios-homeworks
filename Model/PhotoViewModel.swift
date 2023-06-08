@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import StorageService
 
 final class PhotoViewModel {
     var ImagesArray: [PostImage]
