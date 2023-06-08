@@ -7,9 +7,13 @@
 
 import UIKit
 import StorageService
+import iOSIntPackage
 
 class PhotosViewController: UIViewController {
-
+    
+    private var recivedImages: [UIImage] = []
+    private let imageFasade = ImagePublisherFacade()
+    
     var textTitle: String?
     
     private let postImage = PostImage.setupImages()
@@ -41,7 +45,18 @@ class PhotosViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCollectionView()
+        setupObserver()
     }
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+                imageFasade.removeSubscription(for: self)
+            }
+       
+    private func setupObserver() {
+            imageFasade.subscribe(self)
+            imageFasade.addImagesWithTimer(time: 0.5 , repeat: 20 )
+
+        }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -49,12 +64,16 @@ class PhotosViewController: UIViewController {
         print("viewWillAppear")
         view.backgroundColor = .white
         navigationController?.navigationBar.isHidden = false
+        imageFasade.rechargeImageLibrary()
+    
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(true)
+        super.viewWillDisappear(animated)
         print("viewWillDisappear")
         navigationController?.navigationBar.isHidden = true
+        
     }
     
     func setupCollectionView() {
@@ -71,13 +90,14 @@ class PhotosViewController: UIViewController {
 }
 extension PhotosViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return postImage.count
+        return recivedImages.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCell", for: indexPath) as? PhotosCollectionViewCell else { return collectionView.dequeueReusableCell(withReuseIdentifier: "defaultcell", for: indexPath)}
-        let avaImage = postImage[indexPath.item]
-        cell.setup(with: avaImage)
+        let avaImage = recivedImages[indexPath.item]
+        cell.setup(image: avaImage)
+
         return cell
     }
     
@@ -94,4 +114,13 @@ extension PhotosViewController: UICollectionViewDataSource, UICollectionViewDele
         print(itemwidth)
         return CGSize(width: itemwidth, height: itemwidth)
     }
+    
 }
+extension PhotosViewController: ImageLibrarySubscriber {
+    func receive(images: [UIImage]) {
+        recivedImages = images
+        collectionView.reloadData()
+    }
+    
+}
+    
