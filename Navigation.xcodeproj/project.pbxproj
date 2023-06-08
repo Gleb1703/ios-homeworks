@@ -29,6 +29,8 @@
 		5CE869A728CB475900DAF27F /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE869A628CB475900DAF27F /* PhotosViewController.swift */; };
 		5CE869A928CB47D300DAF27F /* ProfileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE869A828CB47D300DAF27F /* ProfileCollectionViewCell.swift */; };
 		F7D8F2D62A316DBF00586A7A /* iOSIntPackage in Frameworks */ = {isa = PBXBuildFile; productRef = F7D8F2D52A316DBF00586A7A /* iOSIntPackage */; };
+		F7E4F9392A317265005B4B9E /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7E4F9382A317265005B4B9E /* CustomButton.swift */; };
+		F7E4F93B2A317284005B4B9E /* FeedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7E4F93A2A317284005B4B9E /* FeedModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -75,6 +77,8 @@
 		5CE869A828CB47D300DAF27F /* ProfileCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCollectionViewCell.swift; sourceTree = "<group>"; };
 		75A8AB534357B56553F4AAB9 /* Pods-StorageService.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StorageService.debug.xcconfig"; path = "Target Support Files/Pods-StorageService/Pods-StorageService.debug.xcconfig"; sourceTree = "<group>"; };
 		CA0BE356A12113D439B7B0C1 /* Pods-Navigation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Navigation.release.xcconfig"; path = "Target Support Files/Pods-Navigation/Pods-Navigation.release.xcconfig"; sourceTree = "<group>"; };
+		F7E4F9382A317265005B4B9E /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CustomButton.swift; path = ../../../CustomButton.swift; sourceTree = "<group>"; };
+		F7E4F93A2A317284005B4B9E /* FeedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +158,8 @@
 				5CAD042E28832D940061A48B /* FeedViewController.swift */,
 				5C1F953F2884FF8700673975 /* InfoViewController.swift */,
 				5C1F953D2884F62A00673975 /* PostViewController.swift */,
+				F7E4F9382A317265005B4B9E /* CustomButton.swift */,
+				F7E4F93A2A317284005B4B9E /* FeedModel.swift */,
 				5C6A948C288871C5001016CE /* Profile */,
 				5C8C2E98287EDC9D00E68583 /* Assets.xcassets */,
 				5C8C2E9A287EDC9D00E68583 /* LaunchScreen.storyboard */,
@@ -304,11 +310,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				5CE869A128CB3CD000DAF27F /* PhotosTableViewCell.swift in Sources */,
+				F7E4F9392A317265005B4B9E /* CustomButton.swift in Sources */,
 				5C6C00B12919653600065E45 /* Checker.swift in Sources */,
 				5C8C2E90287EDC9B00E68583 /* AppDelegate.swift in Sources */,
 				5CE869A928CB47D300DAF27F /* ProfileCollectionViewCell.swift in Sources */,
 				5C1F953E2884F62A00673975 /* PostViewController.swift in Sources */,
 				5CB24F8828B4F65600232634 /* LogInViewController.swift in Sources */,
+				F7E4F93B2A317284005B4B9E /* FeedModel.swift in Sources */,
 				5CE869A328CB3E8D00DAF27F /* PhotosCollectionViewCell.swift in Sources */,
 				5C582B68291429BC00ACC66F /* User.swift in Sources */,
 				5C6C00B529196CF100065E45 /* LoginViewControllerDelegate.swift in Sources */,
