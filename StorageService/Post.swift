@@ -2,7 +2,7 @@
 //  Post.swift
 //  Navigation
 //
-//  Created by Artem Poletaev on 17.07.2022.
+//  Created by gleb on 03/06/2023
 //
 
 import UIKit
@@ -19,10 +19,10 @@ public struct Post {
 public struct StorageOfPosts {
     
     public static let viewModel: [Post] = [
-    Post(author: "Очень странные дела", description: "Сериал о двух мирах", image: "Post1", views: 1000, likes: 900),
-    Post(author: "Удача", description: "Мультик про кота и девочку без удачи", image: "Post2", views: 500, likes: 450),
-    Post(author: "Медленные лошади", description: "Сериал про неудачников из m5", image: "Post3", views: 700, likes: 600),
-    Post(author: "Не сработало", description: "Сериал про стартап", image: "Post4", views: 455, likes: 355)]
+    Post(author: "Крысиная семья", description: "Они любят друг друга!", image: "Post1", views: 1000, likes: 900),
+    Post(author: "Группа Крысиный Король", description: "Сегодня выпустили новый альбом!", image: "Post2", views: 500, likes: 450),
+    Post(author: "Льготы крысам", description: "Проезд для крыс стал бесплатным", image: "Post3", views: 700, likes: 600),
+    Post(author: "Мыльная опера", description: "Лучший гель для душа уже в продаже", image: "Post4", views: 455, likes: 355)]
 }
 
 public struct PostImage {

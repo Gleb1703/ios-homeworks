@@ -2,7 +2,7 @@
 //  PostViewController.swift
 //  Navigation
 //
-//  Created by Artem Poletaev on 18.07.2022.
+//  Created by gleb on 28/12/2022.
 //
 
 import UIKit

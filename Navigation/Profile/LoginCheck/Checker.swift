@@ -10,8 +10,8 @@ import UIKit
 final class Checker {
     static var shared = Checker()
     
-    private let loginCheck: String = "www"
-    private let passCheck: String = "aa"
+    private let loginCheck: String = "1212"
+    private let passCheck: String = "2121"
     var user: User?
 
         func check(login: String, pass: String) -> Bool {

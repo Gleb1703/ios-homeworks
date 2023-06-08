@@ -2,7 +2,7 @@
 //  PostTableViewCell.swift
 //  Navigation
 //
-//  Created by Artem Poletaev on 05.09.2022.
+//  Created by gleb on 26/03/2023.
 //
 
 import UIKit

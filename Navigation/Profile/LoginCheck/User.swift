@@ -2,7 +2,7 @@
 //  User.swift
 //  Navigation
 //
-//  Created by Artem Poletaev on 03.11.2022.
+//  Created by gleb on 14.05.2022.
 //
 
 import UIKit
@@ -26,8 +26,8 @@ class User {
 }
 
 class CurrentUserService: UserService {
-    private let user = User(login: "hipster", fullName: "Hipster Cat", avatarImage: UIImage(named: "IMG_0924")! , status: "Waiting for something" )
-    private let userPass = "cat"
+    private let user = User(login: "white", fullName: "White Rat", avatarImage: UIImage(named: "IMG_0924")! , status: "Waiting for something" )
+    private let userPass = "white"
     
     func checkLogin(login: String, pass: String) -> User? {
         if (login == user.login) && (pass == userPass) {
@@ -38,8 +38,8 @@ class CurrentUserService: UserService {
     }
 }
     class TestUserService: UserService {
-        private let testUser = User(login: "mops", fullName: "Hipster dog", avatarImage: UIImage(named: "dog1")! , status: "I'm pretty" )
-        private let testUserPass = "dog"
+        private let testUser = User(login: "twins", fullName: "Twins", avatarImage: UIImage(named: "twins")! , status: "I'm pretty" )
+        private let testUserPass = "twins"
         
         func checkLogin(login: String, pass: String) -> User? {
             if (login == testUser.login) && (pass == testUserPass) {

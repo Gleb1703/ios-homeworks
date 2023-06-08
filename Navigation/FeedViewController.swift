@@ -1,8 +1,8 @@
 //
-//  FeedViewController.swift
+//  FirstController.swift
 //  Navigation
 //
-//  Created by Artem Poletaev on 16.07.2022.
+//  Created by gleb on 17/12/2022.
 //
 
 import UIKit
