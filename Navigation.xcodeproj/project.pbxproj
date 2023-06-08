@@ -28,10 +28,10 @@
 		5CE869A328CB3E8D00DAF27F /* PhotosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE869A228CB3E8D00DAF27F /* PhotosCollectionViewCell.swift */; };
 		5CE869A728CB475900DAF27F /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE869A628CB475900DAF27F /* PhotosViewController.swift */; };
 		5CE869A928CB47D300DAF27F /* ProfileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE869A828CB47D300DAF27F /* ProfileCollectionViewCell.swift */; };
+		F792CD672A31C79B00A09E1A /* CoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F792CD662A31C79B00A09E1A /* CoordinatorProtocol.swift */; };
 		F7D8F2D62A316DBF00586A7A /* iOSIntPackage in Frameworks */ = {isa = PBXBuildFile; productRef = F7D8F2D52A316DBF00586A7A /* iOSIntPackage */; };
 		F7E4F9392A317265005B4B9E /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7E4F9382A317265005B4B9E /* CustomButton.swift */; };
 		F7E4F93B2A317284005B4B9E /* FeedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7E4F93A2A317284005B4B9E /* FeedModel.swift */; };
-		F7E4F93E2A317517005B4B9E /* CoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7E4F93D2A317517005B4B9E /* CoordinatorProtocol.swift */; };
 		F7E4F9402A31752F005B4B9E /* TabbarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7E4F93F2A31752F005B4B9E /* TabbarCoordinator.swift */; };
 		F7E4F9422A317564005B4B9E /* FeedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7E4F9412A317564005B4B9E /* FeedCoordinator.swift */; };
 		F7E4F9442A31758D005B4B9E /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7E4F9432A31758C005B4B9E /* ProfileCoordinator.swift */; };
@@ -85,9 +85,9 @@
 		5CE869A828CB47D300DAF27F /* ProfileCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCollectionViewCell.swift; sourceTree = "<group>"; };
 		75A8AB534357B56553F4AAB9 /* Pods-StorageService.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StorageService.debug.xcconfig"; path = "Target Support Files/Pods-StorageService/Pods-StorageService.debug.xcconfig"; sourceTree = "<group>"; };
 		CA0BE356A12113D439B7B0C1 /* Pods-Navigation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Navigation.release.xcconfig"; path = "Target Support Files/Pods-Navigation/Pods-Navigation.release.xcconfig"; sourceTree = "<group>"; };
+		F792CD662A31C79B00A09E1A /* CoordinatorProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoordinatorProtocol.swift; path = ../../../../Users/gleb/.Trash/CoordinatorProtocol.swift; sourceTree = "<group>"; };
 		F7E4F9382A317265005B4B9E /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CustomButton.swift; path = ../../../CustomButton.swift; sourceTree = "<group>"; };
 		F7E4F93A2A317284005B4B9E /* FeedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedModel.swift; sourceTree = "<group>"; };
-		F7E4F93D2A317517005B4B9E /* CoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CoordinatorProtocol.swift; path = ../../../CoordinatorProtocol.swift; sourceTree = "<group>"; };
 		F7E4F93F2A31752F005B4B9E /* TabbarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarCoordinator.swift; sourceTree = "<group>"; };
 		F7E4F9412A317564005B4B9E /* FeedCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCoordinator.swift; sourceTree = "<group>"; };
 		F7E4F9432A31758C005B4B9E /* ProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
@@ -210,7 +210,7 @@
 		F7E4F93C2A3174F7005B4B9E /* Coordinators */ = {
 			isa = PBXGroup;
 			children = (
-				F7E4F93D2A317517005B4B9E /* CoordinatorProtocol.swift */,
+				F792CD662A31C79B00A09E1A /* CoordinatorProtocol.swift */,
 				F7E4F93F2A31752F005B4B9E /* TabbarCoordinator.swift */,
 				F7E4F9412A317564005B4B9E /* FeedCoordinator.swift */,
 				F7E4F9432A31758C005B4B9E /* ProfileCoordinator.swift */,
@@ -360,6 +360,7 @@
 				5CB24F8828B4F65600232634 /* LogInViewController.swift in Sources */,
 				F7E4F94E2A317737005B4B9E /* LoginViewModel.swift in Sources */,
 				F7E4F93B2A317284005B4B9E /* FeedModel.swift in Sources */,
+				F792CD672A31C79B00A09E1A /* CoordinatorProtocol.swift in Sources */,
 				5CE869A328CB3E8D00DAF27F /* PhotosCollectionViewCell.swift in Sources */,
 				F7E4F9402A31752F005B4B9E /* TabbarCoordinator.swift in Sources */,
 				5C582B68291429BC00ACC66F /* User.swift in Sources */,
@@ -370,7 +371,6 @@
 				5C1F95402884FF8700673975 /* InfoViewController.swift in Sources */,
 				5CE869A728CB475900DAF27F /* PhotosViewController.swift in Sources */,
 				F7E4F9442A31758D005B4B9E /* ProfileCoordinator.swift in Sources */,
-				F7E4F93E2A317517005B4B9E /* CoordinatorProtocol.swift in Sources */,
 				5C6A949028887249001016CE /* ProfileViewController.swift in Sources */,
 				5CE8699C28C62E4800DAF27F /* PostTableViewCell.swift in Sources */,
 				5C6C00B72919736900065E45 /* LoginFactory.swift in Sources */,
