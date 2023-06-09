@@ -2,7 +2,7 @@
 //  CoordinatorProtocol.swift
 //  Navigation
 //
-//  Created by Artem Poletaev on 04.04.2023.
+//  Created by gleb on 09/06/2023.
 //
 
 import UIKit
