@@ -30,6 +30,7 @@
 		5CE869A328CB3E8D00DAF27F /* PhotosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE869A228CB3E8D00DAF27F /* PhotosCollectionViewCell.swift */; };
 		5CE869A728CB475900DAF27F /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE869A628CB475900DAF27F /* PhotosViewController.swift */; };
 		5CE869A928CB47D300DAF27F /* ProfileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE869A828CB47D300DAF27F /* ProfileCollectionViewCell.swift */; };
+		F786024C2A67F74500AEC2D7 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F786024B2A67F74500AEC2D7 /* NetworkManager.swift */; };
 		F7C7CC052A3216130065162A /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = F7C7CC042A3216130065162A /* SnapKit */; };
 		F7C7CC062A32164B0065162A /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C77FAC528847EAD0044A0A1 /* Post.swift */; };
 /* End PBXBuildFile section */
@@ -73,6 +74,7 @@
 		5CE869A628CB475900DAF27F /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
 		5CE869A828CB47D300DAF27F /* ProfileCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCollectionViewCell.swift; sourceTree = "<group>"; };
 		F738912C2A33A3B6006A24CA /* Navigation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Navigation.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F786024B2A67F74500AEC2D7 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,6 +144,7 @@
 				5C8C2E91287EDC9B00E68583 /* SceneDelegate.swift */,
 				5C1F953F2884FF8700673975 /* InfoViewController.swift */,
 				5C1F953D2884F62A00673975 /* PostViewController.swift */,
+				F786024B2A67F74500AEC2D7 /* NetworkManager.swift */,
 				5C89A8DC29D44A9E0042A607 /* Feed */,
 				5C6A948C288871C5001016CE /* Profile */,
 				5C8C2E98287EDC9D00E68583 /* Assets.xcassets */,
@@ -234,6 +237,7 @@
 				5C89A8DE29D44AE50042A607 /* CustomButton.swift in Sources */,
 				5C6C00B12919653600065E45 /* Checker.swift in Sources */,
 				5C8C2E90287EDC9B00E68583 /* AppDelegate.swift in Sources */,
+				F786024C2A67F74500AEC2D7 /* NetworkManager.swift in Sources */,
 				5CE869A928CB47D300DAF27F /* ProfileCollectionViewCell.swift in Sources */,
 				5C1F953E2884F62A00673975 /* PostViewController.swift in Sources */,
 				5CB24F8828B4F65600232634 /* LogInViewController.swift in Sources */,
