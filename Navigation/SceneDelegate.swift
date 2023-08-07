@@ -48,6 +48,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         self.window?.rootViewController = tabBarController
         self.window?.makeKeyAndVisible()
+        
+        let appConfiguration = AppConfiguration.allCases.randomElement()!
+        NetworkManager.request(for: appConfiguration)
                 
         func sceneDidDisconnect(_ scene: UIScene) {
             // Called as the scene is being released by the system.

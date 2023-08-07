@@ -7,25 +7,39 @@
 
 import Foundation
 
-public struct NetworkManager {
-    
-    let urlStarships = URL(string: "https://swapi.dev/api/starships/3")
-    let urlPeople = URL(string: "https://swapi.dev/api/people/5")
+struct NetworkManager {
 
     static func request(for configuration: AppConfiguration) {
-        if let urlPlanets = URL(string: "https://swapi.dev/api/planets/5"){
-            let dataTask = URLSession.shared.dataTask(with: urlPlanets) { data, response, error in
-                print(error)
-            }
-            dataTask.resume()
+        switch configuration {
+        case .films(let value):
+            guard let url = URL(string: value) else { return }
+            dataTask(url)
+        case .vehicles(let value):
+            guard let url = URL(string: value) else { return }
+            dataTask(url)
+        case .planets(let value):
+            guard let url = URL(string: value) else { return }
+            dataTask(url)
         }
     }
-}
 
-enum AppConfiguration: String {
-    
-    case planets = "https://swapi.dev/api/planets/5"
-    case starships = "https://swapi.dev/api/starships/3"
-    case people = "https://swapi.dev/api/people/5"
-    
+    static func dataTask(_ address: URL) {
+        let session = URLSession.shared
+        let task = session.dataTask(with: address) { data, response, error in
+
+            if let error = error {
+                print("Error occurred: \(error.localizedDescription.debugDescription)")
+                // Code=-1009 "The Internet connection appears to be offline.
+            } else {
+                guard let data = data else { return }
+                let string = String(decoding: data, as: UTF8.self)
+                print("Received data: \(string)")
+
+                if let response = response as? HTTPURLResponse {
+                    print("Full response: \(response.allHeaderFields), status code: \(response.statusCode)")
+                }
+            }
+        }
+        task.resume()
+    }
 }
