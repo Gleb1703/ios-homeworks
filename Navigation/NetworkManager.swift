@@ -9,20 +9,6 @@ import Foundation
 
 struct NetworkManager {
 
-    static func request(for configuration: AppConfiguration) {
-        switch configuration {
-        case .films(let value):
-            guard let url = URL(string: value) else { return }
-            dataTask(url)
-        case .vehicles(let value):
-            guard let url = URL(string: value) else { return }
-            dataTask(url)
-        case .planets(let value):
-            guard let url = URL(string: value) else { return }
-            dataTask(url)
-        }
-    }
-
     static func dataTask(_ address: URL) {
         let session = URLSession.shared
         let task = session.dataTask(with: address) { data, response, error in
