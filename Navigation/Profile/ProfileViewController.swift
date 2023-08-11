@@ -9,13 +9,16 @@ import UIKit
 
 class ProfileViewController: UIViewController {
 
+    // MARK: - DATA
     
     fileprivate lazy var data = PostModel.make()
 
+//    var timer: Timer?
 
     var userService: UserService
     var login: String?
     
+    // MARK: - SUBVIEWS
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView.init(
@@ -36,6 +39,7 @@ class ProfileViewController: UIViewController {
         case base = "TableSectionFooterHeaderView_ReuseID"
     }
     
+    // MARK: - USER SERVICE INIT
     
     init(userService: UserService, login: String) {
         self.userService = userService
@@ -47,6 +51,7 @@ class ProfileViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - LIFECYCLE
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,19 +60,17 @@ class ProfileViewController: UIViewController {
         setupSubview()
         setupConstraints()
         tuneTableView()
+//        startTimer()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.isHidden = true
     }
     
+    // MARK: - PRIVATE METHODS
     
     private func setupView() {
-        #if DEBUG
-        view.backgroundColor = .white
-        #else
-        view.backgroundColor = .yellow
-        #endif
+        view.backgroundColor = .systemGray6
     }
     
     private func setupSubview() {
@@ -105,8 +108,13 @@ class ProfileViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
     }
+
+    func dismissSelf() {
+        self.navigationController?.popViewController(animated: true)
+    }
 }
 
+// MARK: - EXTENSIONS
 
 extension ProfileViewController: UITableViewDelegate {
     

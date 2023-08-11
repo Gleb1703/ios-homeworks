@@ -48,6 +48,10 @@
 		F784FB6F2A85B0AF0003A4C2 /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F784FB6E2A85B0AF0003A4C2 /* PostModel.swift */; };
 		F786024C2A67F74500AEC2D7 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F786024B2A67F74500AEC2D7 /* NetworkManager.swift */; };
 		F79F53FA2A85B23000BE12B5 /* PhotoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F79F53F92A85B23000BE12B5 /* PhotoModel.swift */; };
+		F7A871CF2A868C3A00624754 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = F7A871CE2A868C3A00624754 /* Realm */; };
+		F7A871D12A868C3A00624754 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = F7A871D02A868C3A00624754 /* RealmSwift */; };
+		F7A871D42A868E5200624754 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7A871D32A868E5200624754 /* Model.swift */; };
+		F7A871D62A868E6D00624754 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7A871D52A868E6D00624754 /* Service.swift */; };
 		F7C7CC052A3216130065162A /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = F7C7CC042A3216130065162A /* SnapKit */; };
 		F7C7CC062A32164B0065162A /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C77FAC528847EAD0044A0A1 /* Post.swift */; };
 /* End PBXBuildFile section */
@@ -107,6 +111,8 @@
 		F784FB6E2A85B0AF0003A4C2 /* PostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostModel.swift; sourceTree = "<group>"; };
 		F786024B2A67F74500AEC2D7 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		F79F53F92A85B23000BE12B5 /* PhotoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoModel.swift; sourceTree = "<group>"; };
+		F7A871D32A868E5200624754 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		F7A871D52A868E6D00624754 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,10 +120,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F7A871D12A868C3A00624754 /* RealmSwift in Frameworks */,
 				F7C7CC052A3216130065162A /* SnapKit in Frameworks */,
 				F784FB5B2A85236F0003A4C2 /* FirebaseFirestore in Frameworks */,
 				F784FB592A85236F0003A4C2 /* FirebaseAuth in Frameworks */,
 				5C98257229CAB98F004EFF88 /* iOSIntPackage in Frameworks */,
+				F7A871CF2A868C3A00624754 /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -158,6 +166,7 @@
 		5C8C2E8E287EDC9B00E68583 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				F7A871D22A868E3D00624754 /* Realm */,
 				F7453AE52A86355C0090DF18 /* GoogleService-Info.plist */,
 				5C8C2E9D287EDC9D00E68583 /* Info.plist */,
 				F743A9302A85B554007D6539 /* Application */,
@@ -275,6 +284,15 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		F7A871D22A868E3D00624754 /* Realm */ = {
+			isa = PBXGroup;
+			children = (
+				F7A871D32A868E5200624754 /* Model.swift */,
+				F7A871D52A868E6D00624754 /* Service.swift */,
+			);
+			path = Realm;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -297,6 +315,8 @@
 				F7C7CC042A3216130065162A /* SnapKit */,
 				F784FB582A85236F0003A4C2 /* FirebaseAuth */,
 				F784FB5A2A85236F0003A4C2 /* FirebaseFirestore */,
+				F7A871CE2A868C3A00624754 /* Realm */,
+				F7A871D02A868C3A00624754 /* RealmSwift */,
 			);
 			productName = Navigation;
 			productReference = F738912C2A33A3B6006A24CA /* Navigation.app */;
@@ -330,6 +350,7 @@
 				5C98257029CAB98F004EFF88 /* XCRemoteSwiftPackageReference "iOSIntPackage" */,
 				F7C7CC032A3216130065162A /* XCRemoteSwiftPackageReference "SnapKit" */,
 				F784FB572A85236F0003A4C2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				F7A871CD2A868C3A00624754 /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = 5C8C2E83287EDC9B00E68583;
 			projectDirPath = "";
@@ -369,6 +390,7 @@
 				F784FB632A852A7C0003A4C2 /* AlertModel.swift in Sources */,
 				F784FB542A83C6820003A4C2 /* JSONModel.swift in Sources */,
 				F784FB612A852A4F0003A4C2 /* CheckerService.swift in Sources */,
+				F7A871D42A868E5200624754 /* Model.swift in Sources */,
 				5CE869A928CB47D300DAF27F /* ProfileHeaderView.swift in Sources */,
 				5C1F953E2884F62A00673975 /* PostViewController.swift in Sources */,
 				5CE869A328CB3E8D00DAF27F /* PhotosCollectionViewCell.swift in Sources */,
@@ -386,6 +408,7 @@
 				F743A9422A85BB37007D6539 /* TabBarController.swift in Sources */,
 				F743A9492A85BBFE007D6539 /* FeedViewModel.swift in Sources */,
 				F784FB6D2A85AAB80003A4C2 /* CurrentUserService.swift in Sources */,
+				F7A871D62A868E6D00624754 /* Service.swift in Sources */,
 				F784FB522A80FA720003A4C2 /* AppConfiguration.swift in Sources */,
 				5CE869A728CB475900DAF27F /* PhotosViewController.swift in Sources */,
 				5C6A949028887249001016CE /* ProfileViewController.swift in Sources */,
@@ -631,6 +654,14 @@
 				minimumVersion = 9.6.0;
 			};
 		};
+		F7A871CD2A868C3A00624754 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		F7C7CC032A3216130065162A /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -656,6 +687,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = F784FB572A85236F0003A4C2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestore;
+		};
+		F7A871CE2A868C3A00624754 /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F7A871CD2A868C3A00624754 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		F7A871D02A868C3A00624754 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F7A871CD2A868C3A00624754 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
 		};
 		F7C7CC042A3216130065162A /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -16,7 +16,7 @@ protocol LoginViewControllerDelegate {
 struct LoginInspector: LoginViewControllerDelegate {
 
     func check(email: String, password: String) -> Bool {
-        CheckerService.shared.checkCredentials(email: email, password: password)
+        CheckerService.shared.signInWithRealm(login: email, password: password)
         if CheckerService.shared.isSignedIn == true {
             return true
         } else {

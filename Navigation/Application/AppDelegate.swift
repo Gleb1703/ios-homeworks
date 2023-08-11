@@ -8,6 +8,7 @@
 import UIKit
 import FirebaseCore
 import FirebaseAuth
+import RealmSwift
 
 @main
 
@@ -17,10 +18,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
+
         FirebaseApp.configure()
+
+        let config = Realm.Configuration(schemaVersion: 1)
+        Realm.Configuration.defaultConfiguration = config
+
         return true
     }
 
+    // MARK: UISceneSession Lifecycle
 
     func application(
         _ application: UIApplication,
@@ -45,4 +52,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         try! FirebaseAuth.Auth.auth().signOut()
     }
 }
-

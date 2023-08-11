@@ -7,9 +7,17 @@
 
 import UIKit
 import FirebaseAuth
+import RealmSwift
 
 class LogInViewController: UIViewController {
     
+// MARK: - SUBVIEWS
+
+    let realm = try! Realm()
+    let service = Service()
+    var users = [Credentials]()
+
+    var credentials = [Credentials]()
 
     var password: String = ""
 
@@ -168,6 +176,7 @@ class LogInViewController: UIViewController {
         return loginIndicator
     }()
     
+    // MARK: - LIFECYCLE
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -177,6 +186,7 @@ class LogInViewController: UIViewController {
         setupConstraints()
         logInButton.setup()
         hackPasswordButton.setup()
+        checkAuth()
 
         NotificationCenter.default.addObserver(self, selector: #selector(openProfile), name: Notification.Name("Login successful"), object: nil)
     }
@@ -199,6 +209,7 @@ class LogInViewController: UIViewController {
         removeKeyboardObservers()
     }
     
+    // MARK: - LAYOUT
     
     private func setupView() {
         self.view.backgroundColor = .white
@@ -258,6 +269,8 @@ class LogInViewController: UIViewController {
         ])
     }
 
+    // MARK: - Keyboard
+
     private func setupKeyboardObservers() {
         let notificationCenter = NotificationCenter.default
     
@@ -293,6 +306,7 @@ class LogInViewController: UIViewController {
         scrollView.contentInset.bottom = 0.0
     }
 
+    // MARK: - Hack Password
 
     private func bruteForce(passwordToUnlock: String) {
         let bruteForce = BruteForce()
@@ -332,6 +346,7 @@ class LogInViewController: UIViewController {
         }
     }
 
+    // MARK: - Log In
 
     @objc private func loginButtonPressed() {
         guard let email = loginTextField.text,
@@ -341,8 +356,8 @@ class LogInViewController: UIViewController {
             AlertModel.shared.showOkActionAlert(title: "Attention", message: "Email and password cannot be empty")
             return
         }
-        logInButton.setTitle("", for: .normal)
-        loginIndicator.startAnimating()
+//        logInButton.setTitle("", for: .normal)
+//        loginIndicator.startAnimating()
         
         guard loginDelegate?.check(email: email, password: password) == true else {
             return
@@ -354,8 +369,15 @@ class LogInViewController: UIViewController {
         let vc = ProfileViewController(userService: currentUserService, login: loginTextField.text!)
         navigationController?.pushViewController(vc, animated: true)
     }
+
+    private func checkAuth() {
+        if UserDefaults.standard.bool(forKey: "isSignedIn") {
+            openProfile()
+        }
+    }
 }
 
+// MARK: - EXTENSIONS
 
 extension LogInViewController: UITextFieldDelegate {
     
