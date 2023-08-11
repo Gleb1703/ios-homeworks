@@ -21,8 +21,6 @@ struct Residents: Decodable {
     let name: String
 }
 
-// MARK: - Task 1
-
 func getTitle(completion: ((_ title: String?) -> Void)? ) {
 
     let session = URLSession(configuration: .default)
@@ -58,8 +56,6 @@ func getTitle(completion: ((_ title: String?) -> Void)? ) {
     task.resume()
 }
 
-// MARK: - Task 2
-
 func getRotationPeriod(completion: ((_ period: String?) -> Void)? ) {
 
     let session = URLSession(configuration: .default)
@@ -88,6 +84,40 @@ func getRotationPeriod(completion: ((_ period: String?) -> Void)? ) {
         do {
             let answer = try JSONDecoder().decode(Planets.self, from: data)
             completion?(answer.orbitalPeriod)
+        } catch let error as NSError {
+            print("Error: \(error.localizedDescription)")
+        }
+    }
+    task.resume()
+}
+
+func getResidentsArray(completion: ((_ residentsArray: [String]?) -> Void)? ) {
+
+    guard let url = URL(string: "https://swapi.dev/api/planets/1") else { return }
+    let session = URLSession(configuration: .default)
+    let task = session.dataTask(with: url) { data, response, error in
+
+        if let error {
+            print(error.localizedDescription)
+            completion?(nil)
+            return
+        }
+
+        if (response as! HTTPURLResponse).statusCode != 200 {
+            print("Status code != 200. Status code: \((response as! HTTPURLResponse).statusCode)")
+            completion?(nil)
+            return
+        }
+
+        guard let data else {
+            print("No data")
+            completion?(nil)
+            return
+        }
+        do {
+            let answer = try JSONDecoder().decode(Planets.self, from: data)
+            completion?(answer.residents)
+            return
         } catch let error as NSError {
             print("Error: \(error.localizedDescription)")
         }

@@ -6,140 +6,50 @@
 //
 
 import UIKit
-import SnapKit
-class ProfileTableHeaderView: UITableViewHeaderFooterView{
+
+class ProfileTableHeaderView: UITableViewHeaderFooterView {
     
-    private var statusText: String = ""
-    
-    private lazy var profileHeaderView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .systemBackground
+    private lazy var profileHeaderView: ProfileHeaderView = {
+        let view = ProfileHeaderView()
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    private lazy var hipsterLabel: UILabel = {
-            let textLabel = UILabel()
-            textLabel.textAlignment = .center
-            textLabel.textColor = .black
-            textLabel.backgroundColor = .clear
-            textLabel.font = UIFont.systemFont(ofSize: 18, weight: .bold)
-            return textLabel
-        }()
-    
-    let avatarImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.layer.cornerRadius = 50
-        imageView.layer.borderColor = CGColor(red: 255, green: 255, blue: 255, alpha: 1)
-        imageView.layer.borderWidth = 3
-        imageView.clipsToBounds = true
-        imageView.contentMode = .scaleAspectFill
-        return imageView
-    }()
-    
-    
-    private lazy var statusTextLabel: UILabel = {
-        let statusTextLabel = UILabel()
-        statusTextLabel.textColor = .gray
-        statusTextLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
-        return statusTextLabel
-    }()
-    
-    private lazy var textFild: UITextField = {
-        let textFild = UITextField()
-        textFild.textColor = .black
-        textFild.font = UIFont.systemFont(ofSize: 15, weight: .regular)
-        textFild.layer.borderWidth = 1
-        textFild.layer.borderColor = UIColor(ciColor: .black).cgColor
-        textFild.layer.cornerRadius = 12
-        textFild.backgroundColor = .white
-        textFild.addTarget(self, action: #selector(statusTextChanged), for: .editingChanged)
-        return textFild
-    }()
-    
-    private lazy var button: UIButton = {
-        let button = UIButton()
-        button.backgroundColor = .systemBlue
-        button.layer.cornerRadius = 4
-        button.layer.shadowOffset = CGSize(width: 4, height: 4)
-        button.layer.shadowRadius = 4
-        button.layer.shadowColor = UIColor(ciColor: .black).cgColor
-        button.layer.shadowOpacity = 0.7
-        button.setTitle("Set status", for: .normal)
-        button.isUserInteractionEnabled = true
-        button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
-        return button
-    }()
-    
-    override init(reuseIdentifier identifier: String?) {
-        super.init(reuseIdentifier: identifier)
+    override init(reuseIdentifier: String?) {
+        super.init(reuseIdentifier: reuseIdentifier)
+        
         setupView()
+        setupSubview()
+        setupConstraints()
     }
     
-    required init?(coder Decoder: NSCoder) {
-        super.init(coder: Decoder)
-        setupView()
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     private func setupView() {
-        self.addSubview(self.profileHeaderView)
         
-        self.addSubview(self.avatarImageView)
-        self.addSubview(self.hipsterLabel)
-        self.addSubview(self.statusTextLabel)
-        self.addSubview(self.textFild)
-        self.addSubview(self.button)
-
-        profileHeaderView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
-        
-        avatarImageView.snp.makeConstraints { make in
-            make.top.equalTo(16)
-            make.size.equalTo(CGSize(width: 100, height: 100))
-            make.leading.equalTo(16)
-        }
-        
-        hipsterLabel.snp.makeConstraints { make in
-            make.top.equalTo(27)
-            make.leading.equalTo(avatarImageView.snp.trailing).offset(16)
-        }
-        statusTextLabel.snp.makeConstraints { make in
-            make.bottom.equalTo(textFild.snp.bottom)
-            make.size.height.equalTo(100)
-            make.trailing.equalTo(-16)
-            make.leading.equalTo(hipsterLabel.snp.leading)
-        }
-        textFild.snp.makeConstraints { make in
-            make.height.equalTo(40)
-            make.leading.equalTo(avatarImageView.snp.trailing).offset(16)
-            make.trailing.equalTo(-16)
-            make.bottom.equalTo(button.snp.top).offset(-20)
-        }
-        
-        button.snp.makeConstraints { make in
-            make.leading.equalTo(16)
-            make.trailing.equalTo(-16)
-            make.bottom.equalTo(-16)
-            make.top.equalTo(avatarImageView.snp.bottom).offset(32)
-            make.height.equalTo(50)
-        }
-
-    }
-    @objc func buttonPressed(){
-        if let text = statusTextLabel.text {
-            print(text)}
-        else {
-            print("текущее поле пустое ")}
-        statusTextLabel.text = statusText
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(self.tap))
+        self.addGestureRecognizer(gesture)
     }
     
-    @objc func statusTextChanged(_ textField: UITextField){
-        statusText = textField.text ?? ""
+    private func setupSubview() {
+        self.addSubview(self.profileHeaderView)
     }
-    func setup(fullName: String, avatarimage: UIImage, status: String ){
-        hipsterLabel.text = fullName
-        avatarImageView.image = avatarimage
-        statusTextLabel.text = status
+    
+    private func setupConstraints() {
+        let safeAreaGuide = self.safeAreaLayoutGuide
         
+        NSLayoutConstraint.activate([
+            
+            profileHeaderView.topAnchor.constraint(equalTo: safeAreaGuide.topAnchor),
+            profileHeaderView.leftAnchor.constraint(equalTo: safeAreaGuide.leftAnchor),
+            profileHeaderView.rightAnchor.constraint(equalTo: safeAreaGuide.rightAnchor),
+            profileHeaderView.bottomAnchor.constraint(equalTo: safeAreaGuide.bottomAnchor),
+        ])
+    }
+    
+    @objc private func tap() {
+        self.endEditing(true)
     }
 }
