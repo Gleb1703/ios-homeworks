@@ -14,6 +14,5 @@ public struct Post {
     public init(title: String) {
         self.title = title
     }
-
+    
 }
-

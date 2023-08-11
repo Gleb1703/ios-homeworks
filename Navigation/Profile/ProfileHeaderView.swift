@@ -76,6 +76,14 @@ class ProfileHeaderView: UIView {
         statusTextField.translatesAutoresizingMaskIntoConstraints = false
         return statusTextField
     }()
+
+    private lazy var signOutButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "rectangle.portrait.and.arrow.right"), for: .normal)
+        button.addTarget(self, action: #selector(signOut), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
     
     private var statusText: String = ""
 
@@ -97,8 +105,13 @@ class ProfileHeaderView: UIView {
         self.addSubview(statusLabel)
         self.addSubview(setStatusButton)
         self.addSubview(statusTextField)
+        self.addSubview(signOutButton)
         setupConstraints()
         setStatusButton.setup()
+    }
+
+    @objc func signOut() {
+        UserDefaults.standard.set(false, forKey: "isSignedIn")
     }
 
     private func setupConstraints() {
@@ -129,7 +142,12 @@ class ProfileHeaderView: UIView {
             statusTextField.heightAnchor.constraint(equalToConstant: 40),
             statusTextField.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 150),
             statusTextField.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -16),
-            statusTextField.bottomAnchor.constraint(equalTo: setStatusButton.topAnchor, constant: -16)
+            statusTextField.bottomAnchor.constraint(equalTo: setStatusButton.topAnchor, constant: -16),
+
+            signOutButton.heightAnchor.constraint(equalToConstant: 30),
+            signOutButton.widthAnchor.constraint(equalToConstant: 30),
+            signOutButton.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -16),
+            signOutButton.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 16)
         ])
     }
 
@@ -166,4 +184,3 @@ class ProfileHeaderView: UIView {
         setStatus()
     }
 }
-

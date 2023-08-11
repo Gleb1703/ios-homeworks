@@ -63,11 +63,7 @@ class ProfileViewController: UIViewController {
     
     
     private func setupView() {
-        #if DEBUG
-        view.backgroundColor = .white
-        #else
-        view.backgroundColor = .yellow
-        #endif
+        view.backgroundColor = .systemBlue
     }
     
     private func setupSubview() {
@@ -104,6 +100,10 @@ class ProfileViewController: UIViewController {
         
         tableView.dataSource = self
         tableView.delegate = self
+    }
+    
+    func dismissSelf() {
+        self.navigationController?.popViewController(animated: true)
     }
 }
 

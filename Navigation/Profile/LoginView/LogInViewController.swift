@@ -7,9 +7,16 @@
 
 import UIKit
 import FirebaseAuth
+import RealmSwift
 
 class LogInViewController: UIViewController {
     
+
+    let realm = try! Realm()
+    let service = Service()
+    var users = [Credentials]()
+
+    var credentials = [Credentials]()
 
     var password: String = ""
 
@@ -177,6 +184,7 @@ class LogInViewController: UIViewController {
         setupConstraints()
         logInButton.setup()
         hackPasswordButton.setup()
+        checkAuth()
 
         NotificationCenter.default.addObserver(self, selector: #selector(openProfile), name: Notification.Name("Login successful"), object: nil)
     }
@@ -257,6 +265,7 @@ class LogInViewController: UIViewController {
             loginIndicator.centerYAnchor.constraint(equalTo: logInButton.centerYAnchor)
         ])
     }
+
 
     private func setupKeyboardObservers() {
         let notificationCenter = NotificationCenter.default
@@ -341,8 +350,7 @@ class LogInViewController: UIViewController {
             AlertModel.shared.showOkActionAlert(title: "Attention", message: "Email and password cannot be empty")
             return
         }
-        logInButton.setTitle("", for: .normal)
-        loginIndicator.startAnimating()
+
         
         guard loginDelegate?.check(email: email, password: password) == true else {
             return
@@ -353,6 +361,12 @@ class LogInViewController: UIViewController {
         let currentUserService = CurrentUserService()
         let vc = ProfileViewController(userService: currentUserService, login: loginTextField.text!)
         navigationController?.pushViewController(vc, animated: true)
+    }
+
+    private func checkAuth() {
+        if UserDefaults.standard.bool(forKey: "isSignedIn") {
+            openProfile()
+        }
     }
 }
 

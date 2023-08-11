@@ -5,7 +5,7 @@
 //  Created by gleb on 06/06/2023.
 //
 
-import UIKit
+import Foundation
 
 protocol LoginFactory {
     func makeLoginInspector() -> LoginInspector
@@ -13,6 +13,6 @@ protocol LoginFactory {
 
 struct MyLoginFactory: LoginFactory {
     func makeLoginInspector() -> LoginInspector {
-        return LoginInspector()
+        LoginInspector()
     }
 }
