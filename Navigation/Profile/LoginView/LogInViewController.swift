@@ -10,6 +10,7 @@ import FirebaseAuth
 
 class LogInViewController: UIViewController {
     
+// MARK: - SUBVIEWS
 
     var password: String = ""
 
@@ -168,6 +169,7 @@ class LogInViewController: UIViewController {
         return loginIndicator
     }()
     
+    // MARK: - LIFECYCLE
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -199,6 +201,7 @@ class LogInViewController: UIViewController {
         removeKeyboardObservers()
     }
     
+    // MARK: - LAYOUT
     
     private func setupView() {
         self.view.backgroundColor = .white
@@ -258,6 +261,8 @@ class LogInViewController: UIViewController {
         ])
     }
 
+    // MARK: - Keyboard
+
     private func setupKeyboardObservers() {
         let notificationCenter = NotificationCenter.default
     
@@ -293,6 +298,7 @@ class LogInViewController: UIViewController {
         scrollView.contentInset.bottom = 0.0
     }
 
+    // MARK: - Hack Password
 
     private func bruteForce(passwordToUnlock: String) {
         let bruteForce = BruteForce()
@@ -332,6 +338,7 @@ class LogInViewController: UIViewController {
         }
     }
 
+    // MARK: - Log In
 
     @objc private func loginButtonPressed() {
         guard let email = loginTextField.text,
@@ -341,8 +348,8 @@ class LogInViewController: UIViewController {
             AlertModel.shared.showOkActionAlert(title: "Attention", message: "Email and password cannot be empty")
             return
         }
-        logInButton.setTitle("", for: .normal)
-        loginIndicator.startAnimating()
+//        logInButton.setTitle("", for: .normal)
+//        loginIndicator.startAnimating()
         
         guard loginDelegate?.check(email: email, password: password) == true else {
             return
@@ -356,6 +363,7 @@ class LogInViewController: UIViewController {
     }
 }
 
+// MARK: - EXTENSIONS
 
 extension LogInViewController: UITextFieldDelegate {
     
