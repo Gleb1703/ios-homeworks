@@ -97,11 +97,11 @@ final class CoreDataManager {
         }
     }
     
-    ///Метод фильтрует данные в CoreData по автору и возвращает отфильтрованный массив.
+    ///Метод фильтрует данные в CoreData по автору и возвращает отфильтрованный массив. В версии ДЗ с FetchResultsController не используется.
     public func filterByAuthor(author: String) -> [FavoritesModel] {
         do {
             let fetchRequest: NSFetchRequest<FavoritesModel> = FavoritesModel.fetchRequest()
-            fetchRequest.predicate = NSPredicate(format: "author == %@", author)
+            fetchRequest.predicate = NSPredicate(format: "author contains[c] %@", author)
             let fetchedResults = try viewContext.fetch(fetchRequest)
             return fetchedResults
         }

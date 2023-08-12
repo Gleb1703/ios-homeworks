@@ -7,16 +7,23 @@
 
 import Foundation
 import UIKit
+import CoreData
 
 class FavoritesViewController: UIViewController {
 
     // MARK: - Properties
-
+    
+    struct Filter {
+        var author: String
+        var isOn: Bool
+    }
+    
     private weak var coordinator: FavoritesCoordinator?
     private var viewModel: CoreDataManager?
     private var post: PostModel?
-    private var filteredPosts: [FavoritesModel] = []
-    private var filterIsOn = false
+    private var filter = Filter(author: "", isOn: false)
+    
+    var fetchResultsController: NSFetchedResultsController<FavoritesModel>?
 
     // MARK: - Subviews
 
@@ -44,21 +51,48 @@ class FavoritesViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         title = "Favourites"
         navigationController?.navigationBar.prefersLargeTitles = true
         view.backgroundColor = .white
+        
         setupBarButtonItems()
         setupSubviews()
         setupConstraints()
+        
         tableView.dataSource = self
         tableView.delegate = self
+        
+        initFetchResultsController()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         CoreDataManager.shared.readFromCoreData()
-        tableView.reloadData()
+        do {
+            try fetchResultsController?.performFetch()
+            tableView.reloadData()
+        } catch {
+            print(error.localizedDescription)
+        }
     }
+    
+    // MARK: - FetchResultsController
+    
+    private func initFetchResultsController() {
+        let request = FavoritesModel.fetchRequest()
+        request.sortDescriptors = [NSSortDescriptor(key: "author", ascending: true)]
+        
+        if filter.isOn {
+            request.predicate = NSPredicate(format: "author contains[c] %@", filter.author)
+        }
+        
+        let context = CoreDataManager.shared.viewContext
 
+        fetchResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+        
+        fetchResultsController?.delegate = self
+    }
+    
     // MARK: - Layout
     
     private func setupBarButtonItems() {
@@ -88,16 +122,31 @@ class FavoritesViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         alert.addAction(UIAlertAction(title: "Filter", style: .default, handler: { [weak alert] (_) in
             guard let author = alert?.textFields![0].text else { return }
-            self.filterIsOn = true
-            self.filteredPosts = CoreDataManager.shared.filterByAuthor(author: author)
-            self.tableView.reloadData()
+            
+            self.title = "Results for \(author)"
+            self.filter.author = author
+            self.filter.isOn = true
+            self.initFetchResultsController()
+            do {
+                try self.fetchResultsController?.performFetch()
+                self.tableView.reloadData()
+            } catch {
+                print(error.localizedDescription)
+            }
         }))
         present(alert, animated: true)
     }
     
     @objc func didTapSearchOff() {
-        filterIsOn = false
-        tableView.reloadData()
+        filter.isOn = false
+        self.title = "Favourites"
+        initFetchResultsController()
+        do {
+            try self.fetchResultsController?.performFetch()
+            self.tableView.reloadData()
+        } catch {
+            print(error.localizedDescription)
+        }
     }
 }
 
@@ -105,13 +154,12 @@ class FavoritesViewController: UIViewController {
 
 extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return fetchResultsController?.sections?.count ?? 0
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        if !filterIsOn {
-            return CoreDataManager.shared.savedPosts.count
-        } else {
-            return filteredPosts.count
-        }
+        return fetchResultsController?.sections?[section].numberOfObjects ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -119,51 +167,52 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "FavoritesTableViewCell", for: indexPath) as? FavoritesTableViewCell else {
             return UITableViewCell()
         }
-        
-        if !filterIsOn {
-            let post = CoreDataManager.shared.savedPosts[indexPath.row]
-            cell.selectionStyle = UITableViewCell.SelectionStyle.none
-            cell.backgroundColor = .white
-            cell.configureCells(post)
-            return cell
-        } else {
-            let post = filteredPosts[indexPath.row]
-            cell.selectionStyle = UITableViewCell.SelectionStyle.none
-            cell.backgroundColor = .white
-            cell.configureCells(post)
-            return cell
+        guard let post = fetchResultsController?.object(at: indexPath) else {
+            print("Post could not be fetched")
+            return UITableViewCell()
         }
-    }
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
+        cell.selectionStyle = UITableViewCell.SelectionStyle.none
+        cell.backgroundColor = .white
+        cell.configureCells(post)
+        return cell
     }
     
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
-        let deleteAction = UIContextualAction(style: .destructive, title: nil) { [weak self] _,_,_ in
-            
-            guard let self = self else { return }
-            
-            let post = CoreDataManager.shared.savedPosts[indexPath.row]
-            
-            if !self.filterIsOn {
+        if editingStyle == .delete {
+            if let post = fetchResultsController?.object(at: indexPath) {
                 CoreDataManager.shared.removeOne(post: post)
-                CoreDataManager.shared.readFromCoreData()
-            } else {
-                CoreDataManager.shared.removeOne(post: post)
-                CoreDataManager.shared.readFromCoreData()
-                
-                self.filteredPosts.removeAll { object in
-                    object.author == post.author && object.likes == post.likes // сравнение лайков на случай, если будет несколько постов одного автора
-                }
             }
-            self.tableView.beginUpdates()
-            self.tableView.deleteRows(at: [indexPath], with: .fade)
-            self.tableView.endUpdates()
+            do {
+                try self.fetchResultsController?.performFetch()
+            } catch {
+                print(error.localizedDescription)
+            }
         }
-        deleteAction.image = UIImage(systemName: "trash")
-        let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
-        return configuration
+    }
+}
+
+// MARK: - NSFetchedResultsControllerDelegate
+
+extension FavoritesViewController: NSFetchedResultsControllerDelegate {
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        
+        switch type {
+        case .insert:
+            tableView.insertRows(at: [newIndexPath!], with: .automatic)
+        case .delete:
+            tableView.deleteRows(at: [indexPath!], with: .automatic)
+        case .move:
+            tableView.moveRow(at: indexPath!, to: newIndexPath!)
+        case .update:
+            tableView.reloadRows(at: [indexPath!], with: .automatic)
+        @unknown default:
+            tableView.reloadData()
+        }
     }
 }

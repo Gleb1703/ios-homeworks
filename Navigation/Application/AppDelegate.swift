@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import FirebaseCore
+import FirebaseAuth
 import CoreData
-import Firebase
 
 @main
 
@@ -45,6 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 fatalError("Error occurred: \(error)")
             }
         })
+        container.viewContext.automaticallyMergesChangesFromParent = true
         return container
     }()
 
