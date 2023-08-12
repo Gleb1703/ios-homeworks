@@ -11,6 +11,7 @@ class TabBarController: UITabBarController {
 
     private let loginVC = Factory(navigationController: UINavigationController(), viewController: .login)
     private let feedVC = Factory(navigationController: UINavigationController(), viewController: .feed)
+    private let favoritesVC = Factory(navigationController: UINavigationController(), viewController: .favourites)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,6 +20,6 @@ class TabBarController: UITabBarController {
     }
 
     func setControllers() {
-        viewControllers = [feedVC.navigationController, loginVC.navigationController]
+        viewControllers = [feedVC.navigationController, loginVC.navigationController, favoritesVC.navigationController]
     }
 }

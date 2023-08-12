@@ -35,6 +35,11 @@
 		F743A9492A85BBFE007D6539 /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F743A9482A85BBFE007D6539 /* FeedViewModel.swift */; };
 		F743A94B2A85BC5D007D6539 /* LoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F743A94A2A85BC5D007D6539 /* LoginButton.swift */; };
 		F7453AE62A86355C0090DF18 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F7453AE52A86355C0090DF18 /* GoogleService-Info.plist */; };
+		F74944C12A870BBF00B268A6 /* FavoritesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74944C02A870BBF00B268A6 /* FavoritesCoordinator.swift */; };
+		F74944C42A870C3300B268A6 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74944C32A870C3300B268A6 /* CoreDataManager.swift */; };
+		F74944C62A870C6500B268A6 /* FavoritesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74944C52A870C6500B268A6 /* FavoritesTableViewCell.swift */; };
+		F74944C82A870C8400B268A6 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74944C72A870C8400B268A6 /* FavoritesViewController.swift */; };
+		F74944CB2A870EE200B268A6 /* FavoritesModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F74944C92A870EE200B268A6 /* FavoritesModel.xcdatamodeld */; };
 		F784FB522A80FA720003A4C2 /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F784FB512A80FA720003A4C2 /* AppConfiguration.swift */; };
 		F784FB542A83C6820003A4C2 /* JSONModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F784FB532A83C6820003A4C2 /* JSONModel.swift */; };
 		F784FB592A85236F0003A4C2 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = F784FB582A85236F0003A4C2 /* FirebaseAuth */; };
@@ -96,6 +101,11 @@
 		F743A9482A85BBFE007D6539 /* FeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
 		F743A94A2A85BC5D007D6539 /* LoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginButton.swift; sourceTree = "<group>"; };
 		F7453AE52A86355C0090DF18 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		F74944C02A870BBF00B268A6 /* FavoritesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesCoordinator.swift; sourceTree = "<group>"; };
+		F74944C32A870C3300B268A6 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		F74944C52A870C6500B268A6 /* FavoritesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesTableViewCell.swift; sourceTree = "<group>"; };
+		F74944C72A870C8400B268A6 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
+		F74944CA2A870EE200B268A6 /* FavoritesModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FavoritesModel.xcdatamodel; sourceTree = "<group>"; };
 		F784FB512A80FA720003A4C2 /* AppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
 		F784FB532A83C6820003A4C2 /* JSONModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONModel.swift; sourceTree = "<group>"; };
 		F784FB602A852A4F0003A4C2 /* CheckerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckerService.swift; sourceTree = "<group>"; };
@@ -158,6 +168,7 @@
 		5C8C2E8E287EDC9B00E68583 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				F74944C22A870C2100B268A6 /* Favorites */,
 				F7453AE52A86355C0090DF18 /* GoogleService-Info.plist */,
 				5C8C2E9D287EDC9D00E68583 /* Info.plist */,
 				F743A9302A85B554007D6539 /* Application */,
@@ -165,6 +176,7 @@
 				F743A9342A85B6E6007D6539 /* Feed MVVM */,
 				F743A9372A85B7B1007D6539 /* Data */,
 				5C6A948C288871C5001016CE /* Profile */,
+				F74944C92A870EE200B268A6 /* FavoritesModel.xcdatamodeld */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -199,6 +211,7 @@
 				F743A93D2A85BB10007D6539 /* FeedCoordinator.swift */,
 				F743A93F2A85BB23007D6539 /* Factory.swift */,
 				F743A9412A85BB37007D6539 /* TabBarController.swift */,
+				F74944C02A870BBF00B268A6 /* FavoritesCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -273,6 +286,16 @@
 				F743A9482A85BBFE007D6539 /* FeedViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		F74944C22A870C2100B268A6 /* Favorites */ = {
+			isa = PBXGroup;
+			children = (
+				F74944C32A870C3300B268A6 /* CoreDataManager.swift */,
+				F74944C52A870C6500B268A6 /* FavoritesTableViewCell.swift */,
+				F74944C72A870C8400B268A6 /* FavoritesViewController.swift */,
+			);
+			path = Favorites;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -373,12 +396,17 @@
 				5C1F953E2884F62A00673975 /* PostViewController.swift in Sources */,
 				5CE869A328CB3E8D00DAF27F /* PhotosCollectionViewCell.swift in Sources */,
 				F743A92F2A85B527007D6539 /* MainCoordinator.swift in Sources */,
+				F74944CB2A870EE200B268A6 /* FavoritesModel.xcdatamodeld in Sources */,
 				5C582B68291429BC00ACC66F /* User.swift in Sources */,
+				F74944C12A870BBF00B268A6 /* FavoritesCoordinator.swift in Sources */,
 				F784FB692A85A61E0003A4C2 /* BruteForce.swift in Sources */,
+				F74944C82A870C8400B268A6 /* FavoritesViewController.swift in Sources */,
 				5CAD042F28832D940061A48B /* FeedViewController.swift in Sources */,
 				F7C7CC062A32164B0065162A /* Post.swift in Sources */,
 				5C1F95402884FF8700673975 /* InfoViewController.swift in Sources */,
 				F743A93A2A85B975007D6539 /* LoginViewController.swift in Sources */,
+				F74944C62A870C6500B268A6 /* FavoritesTableViewCell.swift in Sources */,
+				F74944C42A870C3300B268A6 /* CoreDataManager.swift in Sources */,
 				F743A9442A85BB78007D6539 /* Word.swift in Sources */,
 				F784FB6F2A85B0AF0003A4C2 /* PostModel.swift in Sources */,
 				F784FB6B2A85A87E0003A4C2 /* LoginInspector.swift in Sources */,
@@ -663,6 +691,19 @@
 			productName = SnapKit;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		F74944C92A870EE200B268A6 /* FavoritesModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				F74944CA2A870EE200B268A6 /* FavoritesModel.xcdatamodel */,
+			);
+			currentVersion = F74944CA2A870EE200B268A6 /* FavoritesModel.xcdatamodel */;
+			path = FavoritesModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 5C8C2E84287EDC9B00E68583 /* Project object */;
 }

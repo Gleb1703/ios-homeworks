@@ -179,8 +179,8 @@ class LogInViewController: UIViewController {
         setupConstraints()
         logInButton.setup()
         hackPasswordButton.setup()
-
-        NotificationCenter.default.addObserver(self, selector: #selector(openProfile), name: Notification.Name("Login successful"), object: nil)
+        openProfile() // пропуск авторизации
+//        NotificationCenter.default.addObserver(self, selector: #selector(openProfile), name: Notification.Name("Login successful"), object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {

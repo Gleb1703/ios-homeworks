@@ -13,10 +13,12 @@ class Factory {
     enum Views {
         case feed
         case login
+        case favourites
     }
 
     let navigationController: UINavigationController
     let viewController: Views
+    let model = CoreDataManager()
 
     init(navigationController: UINavigationController, viewController: Views) {
         self.navigationController = navigationController
@@ -36,6 +38,11 @@ class Factory {
             let controller = LogInViewController(coordinator: loginCoordinator)
             controller.loginDelegate = MyLoginFactory().makeLoginInspector()
             navigationController.tabBarItem = .init(title: "Profile", image: UIImage(systemName: "person.crop.circle"), tag: 1)
+            navigationController.setViewControllers([controller], animated: true)
+        case .favourites:
+            let favoritesCoordinator = FavoritesCoordinator(navigationController: navigationController)
+            let controller = FavoritesViewController(model: model, coordinator: favoritesCoordinator)
+            navigationController.tabBarItem = .init(title: "Favourites", image: UIImage(systemName: "star"), tag: 2)
             navigationController.setViewControllers([controller], animated: true)
         }
     }

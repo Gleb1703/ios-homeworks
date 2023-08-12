@@ -9,13 +9,15 @@ import UIKit
 
 class ProfileViewController: UIViewController {
 
+    // MARK: - Properties
     
-    fileprivate lazy var data = PostModel.make()
-
+    private var posts: [PostModel] = PostModel.make()
+    private var cellIndex = 0
 
     var userService: UserService
     var login: String?
     
+    // MARK: - Subviews
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView.init(
@@ -36,6 +38,7 @@ class ProfileViewController: UIViewController {
         case base = "TableSectionFooterHeaderView_ReuseID"
     }
     
+    // MARK: - User service init
     
     init(userService: UserService, login: String) {
         self.userService = userService
@@ -47,6 +50,7 @@ class ProfileViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,13 +65,10 @@ class ProfileViewController: UIViewController {
         self.navigationController?.navigationBar.isHidden = true
     }
     
+    // MARK: - Layout
     
     private func setupView() {
-        #if DEBUG
-        view.backgroundColor = .white
-        #else
-        view.backgroundColor = .yellow
-        #endif
+        view.backgroundColor = .systemGray6
     }
     
     private func setupSubview() {
@@ -105,15 +106,42 @@ class ProfileViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
     }
+
+    // MARK: - Log out
+
+    private func dismissSelf() {
+        self.navigationController?.popViewController(animated: true)
+    }
+
+    // MARK: - Add to favorites
+
+    @objc private func addToFavorites() {
+
+        CoreDataManager.shared.readFromCoreData()
+
+        let post = posts[cellIndex]
+        var isSaved = false
+
+        for i in CoreDataManager.shared.savedPosts {
+            if i.descr == post.description {
+                isSaved = true
+            }
+        }
+
+        if isSaved == false {
+            CoreDataManager.shared.saveToCoreData(post: post)
+            AlertModel.shared.showOkActionAlert(title: "Congratulations", message: "Post has been added to Favourites")
+        } else {
+            AlertModel.shared.showOkActionAlert(title: "Attention", message: "Post is already in Favourites")
+        }
+    }
 }
 
+// MARK: - TableView Extensions
 
 extension ProfileViewController: UITableViewDelegate {
     
-    func tableView(
-        _ tableView: UITableView,
-        heightForHeaderInSection section: Int
-    ) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 0 {
             return 250
         } else {
@@ -121,10 +149,7 @@ extension ProfileViewController: UITableViewDelegate {
         }
     }
     
-    func tableView(
-        _ tableView: UITableView,
-        viewForHeaderInSection section: Int
-    ) -> UIView? {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 0 {
             guard let headerView = tableView.dequeueReusableHeaderFooterView(
                 withIdentifier: HeaderFooterReuseID.base.rawValue
@@ -138,10 +163,7 @@ extension ProfileViewController: UITableViewDelegate {
         }
     }
     
-    func tableView(
-        _ tableView: UITableView,
-        didSelectRowAt indexPath: IndexPath
-    ) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 {
             let nextViewController = PhotosViewController()
             navigationController?.navigationBar.isHidden = false
@@ -149,6 +171,8 @@ extension ProfileViewController: UITableViewDelegate {
                 nextViewController,
                 animated: true
             )
+        } else {
+            self.cellIndex = indexPath.row
         }
     }
 }
@@ -159,21 +183,15 @@ extension ProfileViewController: UITableViewDataSource {
         2
     }
     
-    func tableView(
-        _ tableView: UITableView,
-        numberOfRowsInSection section: Int
-    ) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
             return 1
         } else {
-            return data.count
+            return posts.count
         }
     }
-    
-    func tableView(
-        _ tableView: UITableView,
-        cellForRowAt indexPath: IndexPath
-    ) -> UITableViewCell {
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             guard let cell = tableView.dequeueReusableCell(
                 withIdentifier: CellReuseID.photos.rawValue,
@@ -190,9 +208,13 @@ extension ProfileViewController: UITableViewDataSource {
                 as? PostTableViewCell else {
             fatalError("could not dequeueReusableCell")
         }
-        
-        let data = data[indexPath.row]
+        let data = posts[indexPath.row]
         cell.setup(with: data)
+
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(addToFavorites))
+        tapRecognizer.numberOfTapsRequired = 2
+
+        cell.addGestureRecognizer(tapRecognizer)
         
         return cell
     }

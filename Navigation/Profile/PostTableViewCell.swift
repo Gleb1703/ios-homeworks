@@ -9,47 +9,48 @@ import UIKit
 
 class PostTableViewCell: UITableViewCell {
     
+    // MARK: - SUBVIEWS
     
     private lazy var authorLabel: UILabel = {
-        let authorLabel = UILabel()
-        authorLabel.translatesAutoresizingMaskIntoConstraints = false
-        authorLabel.font = UIFont.systemFont(ofSize: 20, weight: .bold)
-        authorLabel.numberOfLines = 2
-        authorLabel.textColor = .black
-        return authorLabel
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        label.numberOfLines = 2
+        label.textColor = .black
+        return label
     }()
     
     private lazy var postImage: UIImageView = {
-        let postImage = UIImageView()
-        postImage.translatesAutoresizingMaskIntoConstraints = false
-        postImage.contentMode = .scaleAspectFit
-        postImage.backgroundColor = .black
-        return postImage
+        let image = UIImageView()
+        image.translatesAutoresizingMaskIntoConstraints = false
+        image.contentMode = .scaleAspectFit
+        image.backgroundColor = .black
+        return image
     }()
     
     private lazy var postDescription: UILabel = {
-        let postDescription = UILabel()
-        postDescription.font = UIFont.systemFont(ofSize: 14, weight: .regular)
-        postDescription.textColor = .systemGray
-        postDescription.translatesAutoresizingMaskIntoConstraints = false
-        postDescription.numberOfLines = 0
-        return postDescription
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+        label.textColor = .systemGray
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 0
+        return label
     }()
     
     private lazy var numberOfLikes: UILabel = {
-        let numberOfLikes = UILabel()
-        numberOfLikes.translatesAutoresizingMaskIntoConstraints = false
-        numberOfLikes.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        numberOfLikes.textColor = .black
-        return numberOfLikes
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
+        label.textColor = .black
+        return label
     }()
     
     private lazy var numberOfViews: UILabel = {
-        let numberOfViews = UILabel()
-        numberOfViews.translatesAutoresizingMaskIntoConstraints = false
-        numberOfViews.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        numberOfViews.textColor = .black
-        return numberOfViews
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
+        label.textColor = .black
+        return label
     }()
     
     private lazy var stackView: UIStackView = {
@@ -67,6 +68,7 @@ class PostTableViewCell: UITableViewCell {
         return stackView
     }()
     
+    // MARK: - LIFECYCLE
     
     override init(
         style: UITableViewCell.CellStyle,
@@ -85,6 +87,7 @@ class PostTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - PRIVATE METHODS
     
     private func setupView() {
         contentView.clipsToBounds = true
@@ -124,6 +127,7 @@ class PostTableViewCell: UITableViewCell {
         ])
     }
     
+    // MARK: - PUBLIC METHODS
     
     func setup(with post: PostModel) {
         authorLabel.text = post.author
