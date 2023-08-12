@@ -14,6 +14,7 @@ class ProfileViewController: UIViewController {
     private var posts: [PostModel] = PostModel.make()
     private var cellIndex = 0
 
+
     var userService: UserService
     var login: String?
     
