@@ -15,6 +15,8 @@ class FavoritesViewController: UIViewController {
     private weak var coordinator: FavoritesCoordinator?
     private var viewModel: CoreDataManager?
     private var post: PostModel?
+    private var filteredPosts: [FavoritesModel] = []
+    private var filterIsOn = false
 
     // MARK: - Subviews
 
@@ -45,6 +47,7 @@ class FavoritesViewController: UIViewController {
         title = "Favourites"
         navigationController?.navigationBar.prefersLargeTitles = true
         view.backgroundColor = .white
+        setupBarButtonItems()
         setupSubviews()
         setupConstraints()
         tableView.dataSource = self
@@ -57,7 +60,13 @@ class FavoritesViewController: UIViewController {
     }
 
     // MARK: - Layout
-
+    
+    private func setupBarButtonItems() {
+        let searchOnButton = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: .plain, target: self, action: #selector(didTapSearchOn))
+        let searchOffButton = UIBarButtonItem(image: UIImage(systemName: "xmark"), style: .plain, target: self, action: #selector(didTapSearchOff))
+        navigationItem.rightBarButtonItems = [searchOnButton, searchOffButton]
+    }
+    
     private func setupSubviews() {
         view.addSubview(tableView)
     }
@@ -70,13 +79,39 @@ class FavoritesViewController: UIViewController {
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
     }
+    
+    // MARK: - Actions
+    
+    @objc func didTapSearchOn() {
+        let alert = UIAlertController(title: "Filter by Author", message: "Enter author name", preferredStyle: .alert)
+        alert.addTextField()
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        alert.addAction(UIAlertAction(title: "Filter", style: .default, handler: { [weak alert] (_) in
+            guard let author = alert?.textFields![0].text else { return }
+            self.filterIsOn = true
+            self.filteredPosts = CoreDataManager.shared.filterByAuthor(author: author)
+            self.tableView.reloadData()
+        }))
+        present(alert, animated: true)
+    }
+    
+    @objc func didTapSearchOff() {
+        filterIsOn = false
+        tableView.reloadData()
+    }
 }
 
 // MARK: - TableView Extension
 
 extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return CoreDataManager.shared.savedPosts.count
+        
+        if !filterIsOn {
+            return CoreDataManager.shared.savedPosts.count
+        } else {
+            return filteredPosts.count
+        }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -84,14 +119,51 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "FavoritesTableViewCell", for: indexPath) as? FavoritesTableViewCell else {
             return UITableViewCell()
         }
-        let post = CoreDataManager.shared.savedPosts[indexPath.row]
-        cell.selectionStyle = UITableViewCell.SelectionStyle.none
-        cell.backgroundColor = .white
-        cell.configureCells(post)
-        return cell
+        
+        if !filterIsOn {
+            let post = CoreDataManager.shared.savedPosts[indexPath.row]
+            cell.selectionStyle = UITableViewCell.SelectionStyle.none
+            cell.backgroundColor = .white
+            cell.configureCells(post)
+            return cell
+        } else {
+            let post = filteredPosts[indexPath.row]
+            cell.selectionStyle = UITableViewCell.SelectionStyle.none
+            cell.backgroundColor = .white
+            cell.configureCells(post)
+            return cell
+        }
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let deleteAction = UIContextualAction(style: .destructive, title: nil) { [weak self] _,_,_ in
+            
+            guard let self = self else { return }
+            
+            let post = CoreDataManager.shared.savedPosts[indexPath.row]
+            
+            if !self.filterIsOn {
+                CoreDataManager.shared.removeOne(post: post)
+                CoreDataManager.shared.readFromCoreData()
+            } else {
+                CoreDataManager.shared.removeOne(post: post)
+                CoreDataManager.shared.readFromCoreData()
+                
+                self.filteredPosts.removeAll { object in
+                    object.author == post.author && object.likes == post.likes // сравнение лайков на случай, если будет несколько постов одного автора
+                }
+            }
+            self.tableView.beginUpdates()
+            self.tableView.deleteRows(at: [indexPath], with: .fade)
+            self.tableView.endUpdates()
+        }
+        deleteAction.image = UIImage(systemName: "trash")
+        let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
+        return configuration
     }
 }

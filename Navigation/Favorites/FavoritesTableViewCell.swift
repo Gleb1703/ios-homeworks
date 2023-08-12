@@ -122,8 +122,8 @@ class FavoritesTableViewCell: UITableViewCell {
     // MARK: - Congifure Cells
 
     public func configureCells(_ post: FavoritesModel) {
-        self.authorLabel.text = post.author!
-        self.postImage.image = UIImage(data: post.image!) ?? UIImage()
+        self.authorLabel.text = post.author
+        self.postImage.image = UIImage(data: post.image ?? Data()) ?? UIImage()
         self.descriptionLabel.text = post.descr
         self.likesCount.text = "Likes: \(post.likes)"
         self.viewsCount.text = "Views: \(post.views)"
